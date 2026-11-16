@@ -1,0 +1,100 @@
+<!doctype html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/validation.js" defer></script>
+  </head>
+  <body class="auth-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <img src="images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <a href="index.html">Back to Home</a>
+      </div>
+    </header>
+    <main class="auth-shell">
+      <section class="auth-intro">
+        <h1>Create Your Account</h1>
+        <p>Join us and find your dream job.</p>
+      </section>
+      <section class="auth-card" aria-labelledby="register-heading">
+        <h2 id="register-heading">Register</h2>
+        <p>Enter your information below.</p>
+        <form id="register-form" novalidate>
+          <fieldset>
+            <legend>Personal Information</legend>
+            <div class="form-grid">
+              <div class="field span-two">
+                <label for="full-name">Full Name</label>
+                <input id="full-name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="contact">Contact</label>
+                <input id="contact" name="contact" type="tel" autocomplete="tel" required>
+              </div>
+              <div class="field">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select gender</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Other</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="dob">Date of Birth</label>
+                <input id="dob" name="dob" type="date" autocomplete="bday" required>
+              </div>
+              <div class="field span-two">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" autocomplete="street-address" rows="3" required></textarea>
+              </div>
+              <div class="field span-two">
+                <label for="role">Select Role</label>
+                <select id="role" name="role" required>
+                  <option value="">Select a role</option>
+                  <option>Job Seeker</option>
+                  <option>Recruiter</option>
+                  <option>HR Manager</option>
+                  <option>Admin</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Account Security</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="new-password" minlength="6" required>
+              </div>
+              <div class="field">
+                <label for="confirm-password">Confirm Password</label>
+                <input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required>
+              </div>
+            </div>
+          </fieldset>
+          <p class="form-message" id="register-message" role="status" aria-live="polite"></p>
+          <button class="button button-full" type="submit">Register</button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a>.</p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+      </div>
+    </footer>
+  </body>
+</html>

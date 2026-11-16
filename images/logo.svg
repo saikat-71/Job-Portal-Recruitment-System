@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">JobPortal</title>
+  <rect x="2" y="2" width="44" height="44" rx="5" fill="#176b62" />
+  <path d="M10 34 19 25l7 5 11-14" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M29 16h8v8" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="56" y="32" fill="#176b62" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">JobPortal</text>
+</svg>

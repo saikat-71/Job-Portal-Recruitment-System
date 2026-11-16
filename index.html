@@ -1,0 +1,129 @@
+<!doctype html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore job opportunities and find your next career step.">
+    <title>JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <img src="images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="#featured-jobs">Job</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a class="nav-button" href="login.html">Login</a>
+          <a class="nav-button" href="register.html">Sign up</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-content">
+          <h1 id="hero-heading">Find Your Dream Job</h1>
+          <p>Explore thousands of job opportunities and take the next step in your career.</p>
+          <form class="job-search" id="job-search-form" action="#featured-jobs" method="get">
+            <label class="visually-hidden" for="job-keyword">Job title or category</label>
+            <input id="job-keyword" type="search" name="keyword" placeholder="Job title or category">
+            <button class="button" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="hero-picture">
+          <img src="images/home-illustration.png" alt="A job seeker working at a laptop" width="1227" height="1281">
+        </div>
+      </section>
+      <section class="featured-section" id="featured-jobs" aria-labelledby="featured-heading">
+        <div class="section-title-row">
+          <h2 id="featured-heading">Featured Jobs</h2>
+          <a href="#featured-jobs">View all <span>→</span>
+          </a>
+        </div>
+        <div class="job-list">
+          <article class="job-card" data-job-title="Web Developer Google">
+            <h3>Web Developer</h3>
+            <p class="company-name">Google</p>
+            <div class="job-meta">
+              <span>Dhaka</span>
+              <span>Full Time</span>
+            </div>
+          </article>
+          <article class="job-card" data-job-title="UI UX Designer Microsoft">
+            <h3>UI/UX Designer</h3>
+            <p class="company-name">Microsoft</p>
+            <div class="job-meta">
+              <span>Dhaka</span>
+              <span>Full Time</span>
+            </div>
+          </article>
+          <article class="job-card" data-job-title="Data Analyst Amazon">
+            <h3>Data Analyst</h3>
+            <p class="company-name">Amazon</p>
+            <div class="job-meta">
+              <span>Dhaka</span>
+              <span>Full Time</span>
+            </div>
+          </article>
+        </div>
+        <p class="search-message" id="search-message" role="status" aria-live="polite"></p>
+      </section>
+      <section class="roles-section" id="about" aria-labelledby="roles-heading">
+        <div class="section-heading">
+          <p class="section-kicker">MADE FOR EVERY STEP</p>
+          <h2 id="roles-heading">One portal, four roles</h2>
+          <p>Each account has tools for its part in the recruitment process.</p>
+        </div>
+        <div class="role-list">
+          <article class="role-item">
+          <span class="role-symbol">↗</span>
+            <h3>Job Seeker</h3>
+            <p>Explore jobs, manage your resume, apply, and track application progress.</p>
+          </article>
+          <article class="role-item">
+          <span class="role-symbol">⌕</span>
+            <h3>Recruiter</h3>
+            <p>Manage company information, publish job posts, and review applicants.</p>
+          </article>
+          <article class="role-item">
+          <span class="role-symbol">◎</span>
+            <h3>HR Manager</h3>
+            <p>Coordinate interviews and record candidate evaluations and decisions.</p>
+          </article>
+          <article class="role-item">
+          <span class="role-symbol">⚙</span>
+            <h3>Admin</h3>
+            <p>Manage user accounts, job categories, and job posts across the portal.</p>
+          </article>
+        </div>
+        <div class="about-cta">
+          <div>
+            <p class="section-kicker">START HERE</p>
+            <h2>Make your next move with confidence.</h2>
+          </div>
+          <a class="button button-white" href="register.html">Create your account <span>→</span>
+          </a>
+        </div>
+      </section>
+      <section class="info-section" id="contact">
+        <h2>Contact</h2>
+        <p>Job Portal &amp; Recruitment System</p>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="login.html">Login</a>
+          <a href="register.html">Sign up</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
