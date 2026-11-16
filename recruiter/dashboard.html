@@ -1,0 +1,91 @@
+<!doctype html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recruiter Dashboard | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <p>Recruiter Dashboard</p>
+      </div>
+    </header>
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <nav class="side-nav" aria-label="Recruiter navigation">
+          <ul>
+            <li>
+              <a href="dashboard.html" aria-current="page">Dashboard</a>
+            </li>
+            <li>
+              <a href="manage-jobs.html">Job Posts</a>
+            </li>
+            <li>
+              <a href="applicants.html">Applicants</a>
+            </li>
+            <li>
+              <a href="company.html">Company Profile</a>
+            </li>
+            <li>
+              <a href="../profile.html">My Profile</a>
+            </li>
+            <li>
+              <a class="logout-link" href="../login.html">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="dashboard-content">
+        <h1 class="page-heading">Recruiter Dashboard</h1>
+        <section class="metric-grid" aria-label="Recruitment summary">
+          <article class="metric-card">
+            <h2>My Job Posts</h2>
+            <p class="metric-value" data-metric="job_posts">0</p>
+          </article>
+          <article class="metric-card">
+            <h2>Total Applications</h2>
+            <p class="metric-value" data-metric="applications">0</p>
+          </article>
+          <article class="metric-card">
+            <h2>Short Listed</h2>
+            <p class="metric-value" data-metric="applicant_reviews" data-filter-field="shortlist_status" data-filter-value="Shortlisted">0</p>
+          </article>
+        </section>
+        <section class="dashboard-section" aria-labelledby="recent-applications-heading">
+          <h2 id="recent-applications-heading">Recent Applications</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Recent Applications</caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Job Title</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody data-application-list="summary">
+                <tr>
+                  <td colspan="3">No applications yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+      </div>
+    </footer>
+  </body>
+</html>
+

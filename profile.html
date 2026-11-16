@@ -1,0 +1,142 @@
+<!doctype html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile &amp; Account Settings | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/validation.js" defer></script>
+  </head>
+  <body class="dashboard-page">
+    <header>
+      <a class="brand" href="index.html">
+        <img src="images/logo.svg" alt="JobPortal" width="155" height="40">
+      </a>
+      <p>Profile &amp; Account Settings</p>
+    </header>
+    <aside>
+      <nav aria-label="Account navigation">
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="recruiter/dashboard.html">Dashboard</a>
+          </li>
+          <li>
+            <a href="profile.html" aria-current="page">My Profile</a>
+          </li>
+          <li>
+            <a class="logout-link" href="login.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <main id="main">
+      <h1>Profile &amp; Account Settings</h1>
+      <section>
+        <h2>Profile Information</h2>
+        <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="users" data-id-field="user_id" data-match="email">
+          <fieldset>
+            <legend>Personal Details</legend>
+            <div>
+              <label for="profile-user-id">User ID (leave blank for a new profile)</label>
+              <input id="profile-user-id" name="user_id">
+            </div>
+            <div>
+              <label for="profile-name">Full Name</label>
+              <input id="profile-name" name="name" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="profile-gender">Gender</label>
+              <select id="profile-gender" name="gender" required>
+                <option value="">Select gender</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div>
+              <label for="profile-dob">Date of Birth</label>
+              <input id="profile-dob" name="dob" type="date" required>
+            </div>
+            <div>
+              <label for="profile-contact">Contact</label>
+              <input id="profile-contact" name="contact" type="tel" autocomplete="tel" required>
+            </div>
+            <div>
+              <label for="profile-email">Email</label>
+              <input id="profile-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div>
+              <label for="profile-address">Address</label>
+              <textarea id="profile-address" name="address" autocomplete="street-address" rows="3" required></textarea>
+            </div>
+            <div>
+              <label for="profile-picture">Profile Picture</label>
+              <input id="profile-picture" name="profile_picture" type="file" accept="image/*">
+            </div>
+          </fieldset>
+          <button type="submit">Update Profile</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Profile Information</caption>
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Contact</th>
+                <th>Address</th>
+                <th>Profile Picture</th>
+              </tr>
+            </thead>
+            <tbody data-record-list="users" data-fields="name,email,gender,dob,contact,address,profile_picture">
+              <tr>
+                <td colspan="7">Profile information will appear here.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section>
+        <h2>Change Password</h2>
+        <form action="#" method="post" data-action="change-password">
+          <div>
+            <label for="current-password">Current Password</label>
+            <input id="current-password" name="current_password" type="password" autocomplete="current-password" required>
+          </div>
+          <div>
+            <label for="new-password">New Password</label>
+            <input id="new-password" name="new_password" type="password" autocomplete="new-password" minlength="6" required>
+          </div>
+          <div>
+            <label for="confirm-password">Confirm New Password</label>
+            <input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required>
+          </div>
+          <button type="submit">Change Password</button>
+        </form>
+      </section>
+      <section>
+        <h2>Delete Account</h2>
+        <form action="#" method="post" data-action="delete-account">
+          <div>
+            <label for="delete-account-email">Enter your account email</label>
+            <input id="delete-account-email" name="email" type="email" required>
+          </div>
+          <button type="submit">Delete Account</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>JobPortal - Job Portal &amp; Recruitment System</p>
+    </footer>
+  </body>
+</html>
+

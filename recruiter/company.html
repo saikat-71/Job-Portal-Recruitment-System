@@ -1,0 +1,115 @@
+<!doctype html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Company Profile | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">
+          <img src="../images/logo.svg" alt="JobPortal" width="165" height="38">
+        </a>
+        <p>Recruiter workspace</p>
+      </div>
+    </header>
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <nav class="side-nav" aria-label="Recruiter navigation">
+          <ul>
+            <li>
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li>
+              <a href="manage-jobs.html">Job Posts</a>
+            </li>
+            <li>
+              <a href="applicants.html">Applicants</a>
+            </li>
+            <li>
+              <a href="company.html" aria-current="page">Company Profile</a>
+            </li>
+            <li>
+              <a href="../profile.html">My Profile</a>
+            </li>
+            <li>
+              <a class="logout-link" href="../login.html">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="dashboard-content" id="main-content">
+        <h1 class="page-heading">Company Profile Management</h1>
+        <section class="panel" aria-labelledby="company-form-heading">
+          <h2 id="company-form-heading">Create or Update Company Profile</h2>
+          <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="companies" data-id-field="company_id">
+            <fieldset>
+              <legend>Company Information</legend>
+              <div>
+                <label for="company-id">Company ID (leave blank to create a new profile)</label>
+                <input type="text" id="company-id" name="company_id">
+              </div>
+              <div>
+                <label for="user-id">Recruiter User ID</label>
+                <input type="text" id="user-id" name="user_id" required>
+              </div>
+              <div>
+                <label for="company-name">Company Name</label>
+                <input type="text" id="company-name" name="company_name" required>
+              </div>
+              <div>
+                <label for="company-information">Company Information</label>
+                <textarea id="company-information" name="company_information" rows="5"></textarea>
+              </div>
+              <div>
+                <label for="company-logo">Company Logo</label>
+                <input type="file" id="company-logo" name="company_logo" accept="image/*">
+              </div>
+            </fieldset>
+            <button type="submit">Save Company Profile</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+        <section class="table-panel" aria-labelledby="company-list-heading">
+          <h2 id="company-list-heading">Company Profiles</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Profiles managed by this Recruiter</caption>
+              <thead>
+                <tr>
+                  <th>Company ID</th>
+                  <th>Recruiter User ID</th>
+                  <th>Company Name</th>
+                  <th>Company Information</th>
+                  <th>Logo File</th>
+                </tr>
+              </thead>
+              <tbody data-record-list="companies" data-fields="company_id,user_id,company_name,company_information,company_logo">
+                <tr>
+                  <td colspan="5">Company records will appear here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form action="#" method="post" data-action="delete" data-collection="companies" data-delete-field="company_id">
+            <div>
+              <label for="delete-company-id">Company ID to delete</label>
+              <input type="text" id="delete-company-id" name="company_id" required>
+            </div>
+            <button class="danger" type="submit">Delete Company Profile</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <p>JobPortal - Job Portal &amp; Recruitment System</p>
+    </footer>
+  </body>
+</html>
+
