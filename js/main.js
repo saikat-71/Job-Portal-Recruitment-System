@@ -47,12 +47,22 @@ function collectFormValues(form) {
     return values;
 }
 
-function saveRecord(form) {
+function saveRecord(form, profilePicture) {
     const collection = form.dataset.collection;
     const records = readRecords(collection);
     const record = collectFormValues(form);
     const defaults = JSON.parse(form.dataset.defaults || "{}");
     Object.assign(record, defaults);
+
+    if (profilePicture) {
+        record.profile_picture = profilePicture;
+    }
+
+    if (collection === "users") {
+        const currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+        if (!record.role && currentUser) record.role = currentUser.role;
+        if (!record.status && currentUser) record.status = currentUser.status || "Active";
+    }
 
     if (collection === "applications" && !record.applied_date) {
         record.applied_date = new Date().toLocaleDateString();
@@ -87,8 +97,17 @@ function saveRecord(form) {
 
     try {
         writeRecords(collection, records);
+
+        if (collection === "users") {
+            const currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+            if (currentUser) {
+                localStorage.setItem("jobPortal:currentUser", JSON.stringify({ ...currentUser, ...record }));
+            }
+        }
+
         renderDynamicContent();
-        showMessage(form, "Record saved.");
+        renderProfileInformation();
+        showMessage(form, "Profile information saved.");
     } catch (error) {
         showMessage(form, "The record could not be saved.", true);
     }
@@ -114,6 +133,56 @@ function deleteRecord(form) {
     writeRecords(collection, filtered);
     renderDynamicContent();
     showMessage(form, "Record removed.");
+}
+
+function renderProfileInformation() {
+    const nameOutput = document.querySelector("#profile-name-view");
+    if (!nameOutput) return;
+
+    let currentUser = null;
+    try {
+        currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+    } catch (error) {
+        currentUser = null;
+    }
+
+    const users = readRecords("users");
+    let user = null;
+
+    if (currentUser) {
+        user = users.find(savedUser =>
+            (currentUser.user_id && savedUser.user_id === currentUser.user_id) ||
+            String(savedUser.email || "").toLowerCase() === String(currentUser.email || "").toLowerCase()
+        );
+    }
+
+    if (!user && currentUser) user = currentUser;
+    if (!user) user = {};
+
+    const showValue = (id, value) => {
+        const output = document.getElementById(id);
+        if (output) output.textContent = value || "Not provided";
+    };
+
+    showValue("profile-name-view", user.name || "Your Name");
+    showValue("profile-role-view", user.role || "Account role not selected");
+    showValue("profile-email-view", user.email || "Email not added yet");
+    showValue("profile-gender-view", user.gender);
+    showValue("profile-dob-view", user.dob);
+    showValue("profile-contact-view", user.contact);
+    showValue("profile-address-view", user.address);
+    showValue("profile-status-view", user.status);
+
+    const photo = document.querySelector("#profile-photo-view");
+    if (photo) photo.src = user.profile_picture || "images/profile-placeholder.svg";
+
+    const profileForm = document.querySelector('form[data-collection="users"]');
+    if (profileForm) {
+        ["user_id", "role", "name", "gender", "dob", "contact", "email", "address"].forEach(name => {
+            const field = profileForm.elements.namedItem(name);
+            if (field && user[name]) field.value = user[name];
+        });
+    }
 }
 
 function renderDynamicContent() {
@@ -237,6 +306,7 @@ function renderJobCards() {
             const detail = document.createElement("p");
             detail.textContent = [record.company_id, record.category_id, record.location].filter(Boolean).join(" | ");
             const link = document.createElement("a");
+            link.className = "button";
             link.href = `job-details.html?job_id=${encodeURIComponent(record.job_id || record.id || "")}`;
             link.textContent = "View Job Details";
             article.append(title, detail, link);
@@ -364,8 +434,21 @@ function setupForms() {
 
             if (action === "save") {
                 const intent = event.submitter?.dataset.intent || event.submitter?.textContent.toLowerCase() || "";
-                if (intent.includes("remove") || intent.includes("delete")) deleteRecord(form);
-                else saveRecord(form);
+
+                if (intent.includes("remove") || intent.includes("delete")) {
+                    deleteRecord(form);
+                } else {
+                    const photoInput = form.querySelector('input[name="profile_picture"]');
+                    const photoFile = photoInput && photoInput.files[0];
+
+                    if (photoFile) {
+                        const reader = new FileReader();
+                        reader.onload = () => saveRecord(form, reader.result);
+                        reader.readAsDataURL(photoFile);
+                    } else {
+                        saveRecord(form);
+                    }
+                }
             } else if (action === "delete") {
                 deleteRecord(form);
             } else if (action === "login") {
@@ -385,6 +468,10 @@ function setupForms() {
                 }
 
                 writeRecords("users", remainingUsers);
+                const currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+                if (currentUser && String(currentUser.email).toLowerCase() === String(email).toLowerCase()) {
+                    localStorage.removeItem("jobPortal:currentUser");
+                }
                 showMessage(form, "Account deleted.");
             }
         });
@@ -395,11 +482,18 @@ document.addEventListener("DOMContentLoaded", () => {
     populateSelectOptions();
     renderJobCards();
     renderDynamicContent();
+    renderProfileInformation();
     prefillApplicationJob();
     renderJobDetails();
     setupPasswordConfirmation();
     setupJobSearch();
     setupForms();
+
+    document.querySelectorAll(".logout-link").forEach(link => {
+        link.addEventListener("click", () => {
+            localStorage.removeItem("jobPortal:currentUser");
+        });
+    });
 });
 
 
