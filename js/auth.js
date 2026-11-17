@@ -50,6 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       if (dashboardPages[role]) {
+        const email = loginForm.elements.namedItem("email").value.trim();
+        let savedUsers = [];
+
+        try {
+          savedUsers = JSON.parse(localStorage.getItem("jobPortal:users") || "[]");
+        } catch (error) {
+          savedUsers = [];
+        }
+
+        const savedUser = savedUsers.find(user =>
+          String(user.email).toLowerCase() === email.toLowerCase() && user.role === role
+        );
+        const currentUser = savedUser || { email: email, role: role, status: "Active" };
+        localStorage.setItem("jobPortal:currentUser", JSON.stringify(currentUser));
+
         message.dataset.error = "false";
         message.textContent = "Login successful. Opening your dashboard…";
         window.setTimeout(() => {

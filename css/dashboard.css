@@ -622,3 +622,130 @@ body[data-page="registration.html"] main > h1 {
     outline: 3px solid #82c9a5;
     outline-offset: 2px;
 }
+
+
+/* Profile summary and account actions */
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 12px 0 22px;
+}
+
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--green-soft);
+}
+
+.profile-top h3 {
+    margin-bottom: 4px;
+}
+
+.profile-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.profile-details div {
+    padding: 12px;
+    background: var(--green-soft);
+    border-radius: 6px;
+}
+
+.profile-details dt {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.profile-details dd {
+    margin: 4px 0 0;
+    overflow-wrap: anywhere;
+}
+
+.profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    color: var(--white);
+    background: var(--green);
+    text-decoration: none;
+}
+
+.button-link:hover {
+    color: var(--white);
+    background: var(--green-dark);
+    text-decoration: none;
+}
+
+.danger-link,
+.danger-button {
+    border-color: var(--danger);
+    color: var(--white);
+    background: var(--danger);
+}
+
+.danger-link:hover,
+.danger-button:hover {
+    border-color: #7f1d1d;
+    color: var(--white);
+    background: #7f1d1d;
+}
+
+.delete-section {
+    border-color: #e6bcbc;
+}
+
+.button-link:focus-visible {
+    outline: 3px solid #82c9a5;
+    outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+    .profile-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+/* Profile and recruiter navigation uses the same button style */
+body.dashboard-page > aside nav a {
+    display: block;
+    margin: 0 0 8px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--green-dark);
+    background: var(--white);
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+body.dashboard-page > aside nav a:hover,
+body.dashboard-page > aside nav a[aria-current="page"] {
+    color: var(--white);
+    background: var(--green);
+    text-decoration: none;
+}
+
+body.dashboard-page > aside nav .logout-link {
+    border-color: var(--danger);
+    color: var(--danger) !important;
+}
+
+body.dashboard-page > aside nav .logout-link:hover {
+    color: var(--white) !important;
+    background: var(--danger);
+}

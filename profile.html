@@ -1,7 +1,7 @@
 <!doctype html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile &amp; Account Settings | JobPortal</title>
+    <title>Profile | JobPortal</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
@@ -33,17 +33,57 @@
         </ul>
       </nav>
     </aside>
-    <main id="main">
+    <main id="main" class="account-main">
       <h1>Profile &amp; Account Settings</h1>
-      <section>
-        <h2>Profile Information</h2>
+
+      <section class="profile-summary" aria-labelledby="profile-summary-title">
+        <h2 id="profile-summary-title">My Information</h2>
+        <div class="profile-top">
+          <img id="profile-photo-view" class="profile-photo" src="images/profile-placeholder.svg" alt="Your profile picture" width="120" height="120">
+          <div>
+            <h3 id="profile-name-view">Your Name</h3>
+            <p id="profile-role-view">Account role</p>
+            <p id="profile-email-view">Email address</p>
+          </div>
+        </div>
+
+        <dl class="profile-details">
+          <div>
+            <dt>Gender</dt>
+            <dd id="profile-gender-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Date of Birth</dt>
+            <dd id="profile-dob-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd id="profile-contact-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Address</dt>
+            <dd id="profile-address-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Account Status</dt>
+            <dd id="profile-status-view">Not provided</dd>
+          </div>
+        </dl>
+
+        <nav class="profile-actions" aria-label="Profile actions">
+          <a class="button-link" href="#profile-update">Update Profile</a>
+          <a class="button-link" href="#change-password">Change Password</a>
+          <a class="button-link danger-link" href="#delete-account">Delete Account</a>
+        </nav>
+      </section>
+
+      <section id="profile-update">
+        <h2>Update Profile Information</h2>
         <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="users" data-id-field="user_id" data-match="email">
+          <input type="hidden" id="profile-user-id" name="user_id">
+          <input type="hidden" id="profile-role" name="role">
           <fieldset>
             <legend>Personal Details</legend>
-            <div>
-              <label for="profile-user-id">User ID (leave blank for a new profile)</label>
-              <input id="profile-user-id" name="user_id">
-            </div>
             <div>
               <label for="profile-name">Full Name</label>
               <input id="profile-name" name="name" autocomplete="name" required>
@@ -75,37 +115,16 @@
               <textarea id="profile-address" name="address" autocomplete="street-address" rows="3" required></textarea>
             </div>
             <div>
-              <label for="profile-picture">Profile Picture</label>
+              <label for="profile-picture">Upload or Change Profile Picture</label>
               <input id="profile-picture" name="profile_picture" type="file" accept="image/*">
             </div>
           </fieldset>
-          <button type="submit">Update Profile</button>
+          <button type="submit">Save Profile Changes</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
-
-        <div class="table-wrap">
-          <table>
-            <caption>Profile Information</caption>
-            <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Date of Birth</th>
-                <th>Contact</th>
-                <th>Address</th>
-                <th>Profile Picture</th>
-              </tr>
-            </thead>
-            <tbody data-record-list="users" data-fields="name,email,gender,dob,contact,address,profile_picture">
-              <tr>
-                <td colspan="7">Profile information will appear here.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </section>
-      <section>
+
+      <section id="change-password">
         <h2>Change Password</h2>
         <form action="#" method="post" data-action="change-password">
           <div>
@@ -121,21 +140,24 @@
             <input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required>
           </div>
           <button type="submit">Change Password</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
-      <section>
+
+      <section id="delete-account" class="delete-section">
         <h2>Delete Account</h2>
         <form action="#" method="post" data-action="delete-account">
           <div>
             <label for="delete-account-email">Enter your account email</label>
             <input id="delete-account-email" name="email" type="email" required>
           </div>
-          <button type="submit">Delete Account</button>
+          <button class="danger-button" type="submit">Delete Account</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
     <footer>
-      <p>JobPortal - Job Portal &amp; Recruitment System</p>
+      <p>Job Portal</p>
     </footer>
   </body>
 </html>
