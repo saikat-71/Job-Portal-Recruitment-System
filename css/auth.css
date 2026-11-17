@@ -163,3 +163,21 @@
     grid-column: auto;
   }
 }
+
+
+.forgot-button {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid #a92d2d;
+  border-radius: 4px;
+  color: #a92d2d;
+  background: #fff4f4;
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.forgot-button:hover {
+  color: #ffffff;
+  background: #a92d2d;
+  text-decoration: none;
+}

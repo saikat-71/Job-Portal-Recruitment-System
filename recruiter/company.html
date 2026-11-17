@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Company Profile | JobPortal</title>
@@ -13,9 +14,16 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="../index.html">
-          <img src="../images/logo.svg" alt="JobPortal" width="165" height="38">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
         </a>
-        <p>Recruiter workspace</p>
+        <p class="header-title">Company Profile</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="../images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
       </div>
     </header>
     <div class="dashboard-layout">
@@ -44,71 +52,83 @@
         </nav>
       </aside>
       <main class="dashboard-content" id="main-content">
-        <h1 class="page-heading">Company Profile Management</h1>
-        <section class="panel" aria-labelledby="company-form-heading">
+        <h1 class="page-heading">Company Profile</h1>
+
+        <section class="company-summary" aria-labelledby="company-summary-title">
+          <h2 id="company-summary-title">Company Information</h2>
+          <div class="company-top">
+            <img id="company-logo-view" class="company-logo" src="../images/company-placeholder.svg" alt="Company logo" width="110" height="110">
+            <div>
+              <h3 id="company-name-view">TechFlow Solutions Inc.</h3>
+              <p id="company-location-view">House 12, Road 5, Sector 11, Uttara, Dhaka 1230, Bangladesh</p>
+            </div>
+          </div>
+          <dl class="company-details">
+            <div>
+              <dt>Company Information</dt>
+              <dd id="company-information-view">TechFlow Solutions Inc. is an innovative IT and software development company in Bangladesh, 
+                specializing in web development, digital solutions, software engineering, and business automation. We focus on delivering 
+                modern technology solutions and creating opportunities for talented professionals.</dd>
+            </div>
+            <div>
+              <dt>Recruiter Contact</dt>
+              <dd id="company-contact-view">md.shsaikat71@gmail.com</dd>
+            </div>
+          </dl>
+          <nav class="company-actions" aria-label="Company profile actions">
+            <a class="button-link" href="#company-edit">Update Company Profile</a>
+            <a class="button-link danger-link" href="#company-delete">Delete Company Profile</a>
+          </nav>
+        </section>
+
+        <section id="company-edit" class="panel" aria-labelledby="company-form-heading">
           <h2 id="company-form-heading">Create or Update Company Profile</h2>
-          <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="companies" data-id-field="company_id">
+          <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="companies" data-id-field="company_id" data-match="user_id">
+            <input type="hidden" id="company-id" name="company_id">
+            <input type="hidden" id="company-user-id" name="user_id">
             <fieldset>
-              <legend>Company Information</legend>
-              <div>
-                <label for="company-id">Company ID (leave blank to create a new profile)</label>
-                <input type="text" id="company-id" name="company_id">
-              </div>
-              <div>
-                <label for="user-id">Recruiter User ID</label>
-                <input type="text" id="user-id" name="user_id" required>
-              </div>
+              <legend>Company Details</legend>
               <div>
                 <label for="company-name">Company Name</label>
                 <input type="text" id="company-name" name="company_name" required>
+              </div>
+              <div>
+                <label for="company-location">Company Location</label>
+                <input type="text" id="company-location" name="company_location" value="408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh" required>
               </div>
               <div>
                 <label for="company-information">Company Information</label>
                 <textarea id="company-information" name="company_information" rows="5"></textarea>
               </div>
               <div>
-                <label for="company-logo">Company Logo</label>
+                <label for="company-logo">Upload or Change Company Logo</label>
                 <input type="file" id="company-logo" name="company_logo" accept="image/*">
               </div>
             </fieldset>
             <button type="submit">Save Company Profile</button>
-            <p class="form-message" role="status" aria-live="polite"></p>
+            <p class="form-status" role="status" aria-live="polite"></p>
           </form>
         </section>
-        <section class="table-panel" aria-labelledby="company-list-heading">
-          <h2 id="company-list-heading">Company Profiles</h2>
-          <div class="table-wrap">
-            <table>
-              <caption>Profiles managed by this Recruiter</caption>
-              <thead>
-                <tr>
-                  <th>Company ID</th>
-                  <th>Recruiter User ID</th>
-                  <th>Company Name</th>
-                  <th>Company Information</th>
-                  <th>Logo File</th>
-                </tr>
-              </thead>
-              <tbody data-record-list="companies" data-fields="company_id,user_id,company_name,company_information,company_logo">
-                <tr>
-                  <td colspan="5">Company records will appear here.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+        <section id="company-delete" class="delete-section" aria-labelledby="delete-company-heading">
+          <h2 id="delete-company-heading">Delete Company Profile</h2>
           <form action="#" method="post" data-action="delete" data-collection="companies" data-delete-field="company_id">
-            <div>
-              <label for="delete-company-id">Company ID to delete</label>
-              <input type="text" id="delete-company-id" name="company_id" required>
-            </div>
+            <input type="hidden" id="delete-company-id" name="company_id">
             <button class="danger" type="submit">Delete Company Profile</button>
-            <p class="form-message" role="status" aria-live="polite"></p>
+            <p class="form-status" role="status" aria-live="polite"></p>
           </form>
         </section>
       </main>
     </div>
     <footer class="site-footer">
-      <p>Job Portal</p>
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="../index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="../profile.html">My Profile</a>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>

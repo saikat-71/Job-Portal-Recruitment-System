@@ -1,10 +1,12 @@
 <!doctype html>
+<html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login | JobPortal</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/auth.css">
+    <script src="js/main.js" defer></script>
     <script src="js/auth.js" defer></script>
     <script src="js/validation.js" defer></script>
   </head>
@@ -14,7 +16,15 @@
         <a class="brand" href="index.html">
           <img src="images/logo.svg" alt="JobPortal" width="155" height="40">
         </a>
-        <a href="index.html">Back to Home</a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="index.html#featured-jobs">Jobs</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+          <a class="nav-button" href="login.html">Login</a>
+          <a class="nav-button" href="register.html">Sign up</a>
+        </nav>
+        <span class="header-space" aria-hidden="true"></span>
       </div>
     </header>
     <main class="auth-shell">
@@ -45,7 +55,7 @@
             </select>
           </div>
           <p class="forgot-link">
-            <a href="reset-password.html">Forgot Password?</a>
+            <a class="forgot-button" href="reset-password.html">Forgot Password?</a>
           </p>
           <p class="form-message" id="login-message" role="status" aria-live="polite"></p>
           <button class="button button-full" type="submit">Login</button>
@@ -55,7 +65,12 @@
     </main>
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Job Portal</p>
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="login.html">Login</a>
+          <a href="register.html">Register</a>
+        </nav>
       </div>
     </footer>
   </body>

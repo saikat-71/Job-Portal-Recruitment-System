@@ -749,3 +749,74 @@ body.dashboard-page > aside nav .logout-link:hover {
     color: var(--white) !important;
     background: var(--danger);
 }
+
+
+/* Company information overview */
+.company-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 12px 0 20px;
+}
+
+.company-logo {
+    width: 110px;
+    height: 110px;
+    flex: 0 0 110px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    object-fit: contain;
+    background: var(--green-soft);
+}
+
+.company-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+.company-details div {
+    padding: 14px;
+    background: var(--green-soft);
+    border-radius: 6px;
+}
+
+.company-details dt {
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.company-details dd {
+    margin: 5px 0 0;
+    overflow-wrap: anywhere;
+}
+
+.company-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+@media (max-width: 520px) {
+    .company-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+.logout-link {
+    display: block;
+    border: 1px solid var(--danger) !important;
+    border-radius: 4px;
+    color: var(--danger) !important;
+    background: #fff4f4;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    color: var(--white) !important;
+    background: var(--danger) !important;
+    text-decoration: none;
+}
