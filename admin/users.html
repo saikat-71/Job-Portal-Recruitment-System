@@ -1,66 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>User Management</title>
-        <link rel="stylesheet" href="../css/admin.css">
-        <link rel="stylesheet" href="../css/users.css">
-        <link rel="icon" href="../images/favicon.svg">
-    </head>
+    
+<head>
+    <title>User Management</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/users.css">
+    <link rel="icon" href="../images/favicon.svg">
+</head>
 
-    <body>
-        <div class="header">
-            <div class="logo">
-                <img src="../images/logo.svg" alt="JobPortal">
-            </div>
-            <h3>User Management</h3>
-            <div class="user-info">
-                <img src="../images/profile-placeholder.svg" alt="Profile">
-                <div>
-                    <h4>JobPortal User</h4>
-                    <p>Admin</p>
-                </div>
-            </div>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="../images/logo.svg" alt="JobPortal">
         </div>
-
-        <div class="sidebar">
-            <a href="dashboard.html">Dashboard</a>
-            <a href="users.html" class="active">User Management</a>
-            <a href="job-categories.html">Job Categories</a>
-            <a href="job-posts.html">Job Posts</a>
-            <a href="reports.html">Reports</a>
-            <a href="../login.html">Logout</a>
-        </div>
-
-        <div class="main">
-            <h1>User Management</h1>
-            <div class="user-controls">
-                <input type="text" id="searchInput" placeholder="Search users...">
-                <a href="add-user.html" class="add-btn">
-                    + Add New User
-                </a>
-            </div>
-
-            <div class="recent-users">
-                <h2>All Users</h2>
-                <table id="usersTable">
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </table>
+        <h3>User Management</h3>
+        <div class="user-info">
+            <img src="../images/profile-placeholder.svg" alt="Profile">
+            <div>
+                <h4>JobPortal User</h4>
+                <p>Admin</p>
             </div>
         </div>
+    </div>
 
 
-        <div class="footer">
-            <p>JobPortal - Job Portal & Recruitment System</p>
+    <div class="sidebar">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="users.html" class="active">User Management</a>
+        <a href="job-categories.html">Job Categories</a>
+        <a href="job-posts.html">Job Posts</a>
+        <a href="reports.html">Reports</a>
+        <a href="../login.html">Logout</a>
+    </div>
+
+
+    <div class="main">
+        <h1>User Management</h1>
+        <div class="user-controls">
+            <input type="text" id="searchInput" placeholder="Search users...">
+            <button type="button" id="showFormBtn" class="add-btn"> + Add New User </button>
         </div>
 
-        <script src="../js/admin.js"></script>
-        <script src="../js/users.js"></script>
-    </body>
+        <div class="user-form hidden" id="userFormBox">
+            <h2 id="formTitle">Add New User</h2>
+            <form id="userForm">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter full name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter email" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required minlength="6">
+
+                <label for="role">Role</label>
+                <select id="role" required>
+                    <option value="">Select Role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Recruiter">Recruiter</option>
+                    <option value="Job Seeker">Job Seeker</option>
+                    <option value="HR Manager">HR Manager</option>
+                </select>
+
+                <label for="status">Status</label>
+                <select id="status" required>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+
+                <button type="submit" id="submitBtn">Add User</button>
+                <button type="button" id="cancelBtn" class="cancel-btn"> Cancel </button>
+            </form>
+        </div>
+
+        <div class="recent-users">
+            <h2>All Users</h2>
+            <table id="usersTable">
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>JobPortal - Job Portal & Recruitment System</p>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script src="../js/users.js"></script>
+
+</body>
 </html>

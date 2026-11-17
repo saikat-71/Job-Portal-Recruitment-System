@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .user-controls {
     display: flex;
     justify-content: space-between;
@@ -18,7 +21,9 @@
     color: white;
     padding: 12px 18px;
     text-decoration: none;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .add-btn:hover {
@@ -31,8 +36,13 @@
     padding: 7px 12px;
     margin-right: 8px;
     display: inline-block;
-    text-decoration: none;
+    border: none;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: #d8e1ef;
 }
 
 .delete-btn {
@@ -44,16 +54,72 @@
     cursor: pointer;
 }
 
-.edit-btn:hover {
-    background-color: #d8e1ef;
-}
-
 .delete-btn:hover {
     background-color: #ebcccc;
 }
 
-@media (max-width: 700px) {
+.user-form {
+    background-color: white;
+    padding: 25px;
+    width: 60%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 25px;
+}
 
+.user-form h2 {
+    color: #285f58;
+}
+
+.user-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    color: #333;
+}
+
+.user-form input, .user-form select {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#submitBtn {
+    background-color: #286b63;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+#submitBtn:hover {
+    background-color: #285f58;
+}
+
+.cancel-btn {
+    background-color: #eee;
+    color: #333;
+    margin-left: 10px;
+    padding: 12px 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-btn:hover {
+    background-color: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 700px) {
     .user-controls {
         display: block;
     }
@@ -64,5 +130,11 @@
     .add-btn {
         display: inline-block;
     }
-
+    .user-form {
+        width: 85%;
+        padding: 15px;
+    }
+    .user-form input, .user-form select {
+        width: 90%;
+    }
 }
