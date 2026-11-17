@@ -5,19 +5,24 @@ body {
 }
 
 .header {
-    height: 55px;
+    height: 65px;
     background-color: white;
     border-bottom: 1px solid #ddd;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0 245px 0 270px;
+    padding: 0 20px;
     box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+
     z-index: 10;
+}
+.logo {
+    justify-self: start;
 }
 .logo img {
     width: 135px;
@@ -25,15 +30,15 @@ body {
 }
 .header h3 {
     color: #285f58;
-    position: absolute;
-    left: 50%; 
+    margin: 0;
+    position: static;
+    text-align: center;
 }
-
-
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
+    justify-self: end;
 }
 .user-info img {
     width: 43px;
@@ -49,7 +54,6 @@ body {
     color: #777;
     font-size: 13px;
 }
-
 
 .sidebar {
     width: 220px;
@@ -110,7 +114,6 @@ body {
     font-size: 28px;
 }
 
-/* Recent Users */
 .recent-users {
     background-color: white;
     padding: 20px;
@@ -160,9 +163,23 @@ th {
 @media (max-width: 700px) {
     .header {
         padding: 0 10px;
+        grid-template-columns: 1fr auto;
     }
     .header h3 {
         display: none;
+    }
+    .logo img{
+        width:100px;
+    }
+        .user-info img {
+        width: 35px;
+        height: 35px;
+    }
+    .user-info h4 {
+        font-size: 13px;
+    }
+    .user-info p {
+        font-size: 11px;
     }
     .sidebar {
         width: 130px;
