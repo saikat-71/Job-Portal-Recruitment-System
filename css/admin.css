@@ -1,0 +1,185 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6fa;
+}
+
+.header {
+    height: 55px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 245px 0 270px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+/*logo pic*/
+.logo img {
+    width: 135px;
+    height: 40px;
+}
+
+/*header title */
+.header h3 {
+    color: #285f58;
+    position: absolute;
+    left: 50%; 
+}
+
+/*user profile */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.user-info img {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+}
+.user-info h4 {
+    margin: 0;
+    color: #285f58;
+}
+.user-info p {
+    margin: 3px 0 0;
+    color: #777;
+    font-size: 13px;
+}
+
+/*sidebar*/
+.sidebar {
+    width: 220px;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    position: fixed;
+    top: 55px;
+    bottom: 36px;
+    padding: 20px;
+}
+.sidebar a {   /*link gula*/
+    display: block;
+    text-decoration: none;
+    color: #333;
+    padding: 13px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+/*sidebar hover and active */
+.sidebar a:hover, .sidebar a.active {
+    background-color: #286b63;
+    color: white;
+}
+/*logout button er hover */
+.sidebar a[href="../login.html"]:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Main Content */
+.main {
+    margin-left: 270px;
+    margin-top: 55px;
+    margin-bottom: 36px;
+    padding: 25px;
+    min-height: 694px;
+}
+.main h1 {
+    color: #285f58;
+    margin-bottom: 30px;
+}
+
+/*dashboard cards*/
+.cards {
+    margin-bottom: 35px;
+}
+.card {
+    display: inline-block;
+    width: 40%;
+    padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.card h3 {
+    color: #555;
+}
+.card h2 {
+    color: #285f58;
+    font-size: 28px;
+}
+
+/* Recent Users */
+.recent-users {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+.recent-users h2 {
+    color: #285f58;
+}
+
+/*table*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f4f6fa;
+}
+
+/*footer*/
+.footer {
+    height: 36px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 14px;
+    z-index: 10;
+}
+.footer p {
+    margin: 0;
+}
+
+/*mobile responsive er jnno*/
+@media (max-width: 700px) {
+    .header {
+        padding: 0 10px;
+    }
+    .header h3 {
+        display: none;
+    }
+    .sidebar {
+        width: 130px;
+        padding: 10px;
+    }
+    .main {
+        margin-left: 160px;
+        padding: 10px;
+    }
+    .card {
+        width: 80%;
+    }
+}

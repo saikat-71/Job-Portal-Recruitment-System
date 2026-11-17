@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../images/favicon.svg">
+</head>
+
+<body>
+    <!------------header part------------>
+    <div class="header">
+
+        <!---logo(left side)--->
+        <div class="logo">
+            <img src="../images/logo.svg" alt="JobPortal">
+        </div>
+        <h3>Admin</h3>
+
+        <!--job portal user(right side)-->
+        <div class="user-info">
+            <img src="../images/profile-placeholder.svg" alt="Profile">
+            <div>
+                <h4>JobPortal User</h4>
+                <p>Admin</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--------sidebar------------>
+    <div class="sidebar">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="users.html">User Management</a>
+        <a href="job-categories.html">Job Categories</a>
+        <a href="job-posts.html">Job Posts</a>
+        <a href="reports.html">Reports</a>
+        <a href="../login.html">Logout</a>
+    </div>
+
+
+    <!-------main content part---------->
+    <div class="main">
+        <h1>Admin Dashboard</h1>
+
+        <!--cards-->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Users</h3>
+                <h2>45</h2>
+            </div>
+            <div class="card">
+                <h3>Recruiters</h3>
+                <h2>12</h2>
+            </div>
+            <div class="card">
+                <h3>Job Seekers</h3>
+                <h2>28</h2>
+            </div>
+            <div class="card">
+                <h3>Job Posts</h3>
+                <h2>18</h2>
+            </div>
+        </div>
+
+        <!----recent users part---->
+        <div class="recent-users">
+            <h2>Recent Users</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Rahim Ahmed</td>
+                    <td>Recruiter</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>Aysha Khan</td>
+                    <td>Job Seeker</td>
+                    <td>Active</td>
+                </tr>
+                <tr>
+                    <td>Tanvir Hasan</td>
+                    <td>Job Seeker</td>
+                    <td>Inactive</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <!---------footer----------->
+    <div class="footer">
+        <p>JobPortal - Job Portal & Recruitment System</p>
+    </div>
+    <script src="../js/admin.js"></script>
+</body>
+</html>
