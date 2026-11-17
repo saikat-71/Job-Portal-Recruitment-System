@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Company Profile | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <p class="header-title">Company Profile</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="../images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <nav class="side-nav" aria-label="Recruiter navigation">
+          <ul>
+            <li>
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li>
+              <a href="manage-jobs.html">Job Posts</a>
+            </li>
+            <li>
+              <a href="applicants.html">Applicants</a>
+            </li>
+            <li>
+              <a href="company.html" aria-current="page">Company Profile</a>
+            </li>
+            <li>
+              <a href="../profile.html">My Profile</a>
+            </li>
+            <li>
+              <a class="logout-link" href="../login.html">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="dashboard-content" id="main-content">
+        <h1 class="page-heading">Company Profile</h1>
+
+        <section class="company-summary" aria-labelledby="company-summary-title" id="company-summary" hidden>
+          <h2 id="company-summary-title">Company Information</h2>
+          <div class="company-top">
+            <img id="company-logo-view" class="company-logo" src="../images/company-placeholder.svg" alt="Company logo" width="110" height="110">
+            <div>
+              <h3 id="company-name-view">No company profile yet</h3>
+              <p id="company-location-view">Create your company profile to add a location.</p>
+            </div>
+          </div>
+          <dl class="company-details">
+            <div>
+              <dt>Company Information</dt>
+              <dd id="company-information-view">No company information has been added yet.</dd>
+            </div>
+            <div>
+              <dt>Recruiter Contact</dt>
+              <dd id="company-contact-view">Recruiter contact will appear here.</dd>
+            </div>
+          </dl>
+          <nav class="company-actions" aria-label="Company profile actions">
+            <a class="button-link" href="#company-edit">Update Company Profile</a>
+            <a class="button-link danger-link" href="#company-delete">Delete Company Profile</a>
+          </nav>
+        </section>
+
+        <section id="company-edit" class="panel" aria-labelledby="company-form-heading">
+          <h2 id="company-form-heading">Create or Update Company Profile</h2>
+          <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="companies" data-id-field="company_id" data-match="user_id">
+            <input type="hidden" id="company-id" name="company_id">
+            <input type="hidden" id="company-user-id" name="user_id">
+            <fieldset>
+              <legend>Company Details</legend>
+              <div>
+                <label for="company-name">Company Name</label>
+                <input type="text" id="company-name" name="company_name" required>
+              </div>
+              <div>
+                <label for="company-location">Company Location</label>
+                <input type="text" id="company-location" name="company_location" placeholder="Enter company address" required>
+              </div>
+              <div>
+                <label for="company-information">Company Information</label>
+                <textarea id="company-information" name="company_information" rows="5"></textarea>
+              </div>
+              <div>
+                <label for="company-logo">Upload or Change Company Logo</label>
+                <input type="file" id="company-logo" name="company_logo" accept="image/*">
+              </div>
+            </fieldset>
+            <button type="submit">Save Company Profile</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section id="company-delete" class="delete-section" aria-labelledby="delete-company-heading">
+          <h2 id="delete-company-heading">Delete Company Profile</h2>
+          <form action="#" method="post" data-action="delete" data-collection="companies" data-delete-field="company_id">
+            <input type="hidden" id="delete-company-id" name="company_id">
+            <button class="danger" type="submit">Delete Company Profile</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="../index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="../profile.html">My Profile</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+

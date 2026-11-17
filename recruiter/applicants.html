@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Applicant Management | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <p class="header-title">Applicant Management</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="../images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <nav class="side-nav" aria-label="Recruiter navigation">
+          <ul>
+            <li>
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li>
+              <a href="manage-jobs.html">Job Posts</a>
+            </li>
+            <li>
+              <a href="applicants.html" aria-current="page">Applicants</a>
+            </li>
+            <li>
+              <a href="company.html">Company Profile</a>
+            </li>
+            <li>
+              <a href="../profile.html">My Profile</a>
+            </li>
+            <li>
+              <a class="logout-link" href="../login.html">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="dashboard-content" id="main-content">
+        <h1 class="page-heading">Applicants</h1>
+        <section class="table-panel" aria-labelledby="application-list-heading">
+          <h2 id="application-list-heading">Applications</h2>
+          <p>Review applicant details and the resume file attached to each application.</p>
+          <div class="table-wrap">
+            <table>
+              <caption>Applications submitted for recruiter job posts</caption>
+              <thead>
+                <tr>
+                  <th>Application ID</th>
+                  <th>Applicant Name</th>
+                  <th>Email</th>
+                  <th>Job</th>
+                  <th>Application Status</th>
+                  <th>Resume File</th>
+                  <th>Application Message</th>
+                  <th>Update Status</th>
+                </tr>
+              </thead>
+              <tbody data-application-list="details">
+                <tr>
+                  <td colspan="8">Application records will appear here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="panel" aria-labelledby="review-form-heading">
+          <h2 id="review-form-heading">Create or Update Applicant Review</h2>
+          <form action="#" method="post" data-action="save" data-collection="applicant_reviews" data-id-field="review_id">
+            <fieldset>
+              <legend>Review and Shortlisting Information</legend>
+              <div>
+                <label for="review-id">Review ID (leave blank to create a review)</label>
+                <input type="text" id="review-id" name="review_id">
+              </div>
+              <div>
+                <label for="application-id">Application ID</label>
+                <select id="application-id" name="application_id" required data-options-collection="applications" data-label-field="email" data-value-field="application_id">
+                  <option value="">Select an application</option>
+                </select>
+              </div>
+              <div>
+                <label for="reviewer-user-id">Recruiter User ID</label>
+                <input type="text" id="reviewer-user-id" name="user_id" readonly required>
+              </div>
+              <div>
+                <label for="review-status">Review Status</label>
+                <select id="review-status" name="review_status" required>
+                  <option value="Pending">Pending</option>
+                  <option value="Reviewed">Reviewed</option>
+                </select>
+              </div>
+              <div>
+                <label for="shortlist-status">Shortlist Status</label>
+                <select id="shortlist-status" name="shortlist_status" required>
+                  <option value="Pending">Pending</option>
+                  <option value="Shortlisted">Shortlisted</option>
+                  <option value="Not shortlisted">Not shortlisted</option>
+                </select>
+              </div>
+              <div>
+                <label for="remarks">Review Remarks</label>
+                <textarea id="remarks" name="remarks" rows="4"></textarea>
+              </div>
+              <div>
+                <label for="reviewed-at">Reviewed At</label>
+                <input type="datetime-local" id="reviewed-at" name="reviewed_at">
+              </div>
+            </fieldset>
+            <button type="submit">Save Applicant Review</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+        <section class="table-panel" aria-labelledby="review-list-heading">
+          <h2 id="review-list-heading">Applicant Review Records</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Review and shortlist decisions</caption>
+              <thead>
+                <tr>
+                  <th>Review ID</th>
+                  <th>Application ID</th>
+                  <th>Review Status</th>
+                  <th>Shortlist Status</th>
+                  <th>Remarks</th>
+                  <th>Reviewed At</th>
+                </tr>
+              </thead>
+              <tbody data-record-list="applicant_reviews" data-fields="review_id,application_id,review_status,shortlist_status,remarks,reviewed_at">
+                <tr>
+                  <td colspan="6">Review records will appear here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form action="#" method="post" data-action="delete" data-collection="applicant_reviews" data-delete-field="review_id">
+            <div>
+              <label for="delete-review-id">Review ID to delete</label>
+              <input type="text" id="delete-review-id" name="review_id" required>
+            </div>
+            <button class="danger" type="submit">Delete Applicant Review</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="../index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="../profile.html">My Profile</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

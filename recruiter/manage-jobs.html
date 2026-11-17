@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Job Posts | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script src="../js/main.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <p class="header-title">Manage Job Posts</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="../images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="dashboard-layout">
+      <aside class="dashboard-sidebar">
+        <nav class="side-nav" aria-label="Recruiter navigation">
+          <ul>
+            <li>
+              <a href="dashboard.html">Dashboard</a>
+            </li>
+            <li>
+              <a href="manage-jobs.html" aria-current="page">Job Posts</a>
+            </li>
+            <li>
+              <a href="applicants.html">Applicants</a>
+            </li>
+            <li>
+              <a href="company.html">Company Profile</a>
+            </li>
+            <li>
+              <a href="../profile.html">My Profile</a>
+            </li>
+            <li>
+              <a class="logout-link" href="../login.html">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="dashboard-content" id="main-content">
+        <h1 class="page-heading">Job Post Management</h1>
+        <section class="panel" aria-labelledby="job-post-form-heading">
+          <h2 id="job-post-form-heading">Create or Update Job Post</h2>
+          <form action="#" method="post" data-action="save" data-collection="job_posts" data-id-field="job_id">
+            <fieldset>
+              <legend>Job Post Information</legend>
+              <div>
+                <label for="job-id">Job ID (leave blank to create a new post)</label>
+                <input type="text" id="job-id" name="job_id">
+              </div>
+              <div>
+                <label for="recruiter-user-id">Recruiter User ID</label>
+                <input type="text" id="recruiter-user-id" name="user_id" readonly required>
+              </div>
+              <div>
+                <label for="company-id">Company</label>
+                <select id="company-id" name="company_id" required data-options-collection="companies" data-label-field="company_name" data-value-field="company_id">
+                  <option value="">Select a company profile</option>
+                </select>
+              </div>
+              <div>
+                <label for="category-id">Job Category</label>
+                <select id="category-id" name="category_id" required data-options-collection="categories" data-label-field="category_name" data-value-field="category_id">
+                  <option value="">Select a job category</option>
+                </select>
+              </div>
+              <div>
+                <label for="job-title">Job Title</label>
+                <input type="text" id="job-title" name="title" required>
+              </div>
+              <div>
+                <label for="job-location">Location</label>
+                <input type="text" id="job-location" name="location" required>
+              </div>
+              <div>
+                <label for="job-status">Status</label>
+                <select id="job-status" name="status" required>
+                  <option value="Open">Open</option>
+                  <option value="Closed">Closed</option>
+                  <option value="Draft">Draft</option>
+                </select>
+              </div>
+              <div>
+                <label for="job-description">Job Description</label>
+                <textarea id="job-description" name="description" rows="5" required></textarea>
+              </div>
+              <div>
+                <label for="job-requirements">Job Requirements</label>
+                <textarea id="job-requirements" name="requirements" rows="5"></textarea>
+              </div>
+            </fieldset>
+            <button type="submit">Save Job Post</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+        <section class="table-panel" aria-labelledby="job-post-list-heading">
+          <h2 id="job-post-list-heading">My Job Posts</h2>
+          <div class="table-wrap">
+            <table>
+              <caption>Job posts managed by this Recruiter</caption>
+              <thead>
+                <tr>
+                  <th>Job ID</th>
+                  <th>Title</th>
+                  <th>Company ID</th>
+                  <th>Category ID</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Description</th>
+                  <th>Requirements</th>
+                </tr>
+              </thead>
+              <tbody data-record-list="job_posts" data-fields="job_id,title,company_id,category_id,location,status,description,requirements">
+                <tr>
+                  <td colspan="8">Job post records will appear here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form action="#" method="post" data-action="delete" data-collection="job_posts" data-delete-field="job_id">
+            <div>
+              <label for="delete-job-id">Job ID to delete</label>
+              <input type="text" id="delete-job-id" name="job_id" required>
+            </div>
+            <button class="danger" type="submit">Delete Job Post</button>
+            <p class="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="../index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="../profile.html">My Profile</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
+

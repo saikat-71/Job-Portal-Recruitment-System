@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile | JobPortal</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/validation.js" defer></script>
+  </head>
+  <body class="dashboard-page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html">
+          <img src="images/logo.svg" alt="JobPortal" width="155" height="40">
+        </a>
+        <p class="header-title">My Profile</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <aside>
+      <nav aria-label="Account navigation">
+        <ul>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="recruiter/dashboard.html">Dashboard</a>
+          </li>
+          <li>
+            <a href="profile.html" aria-current="page">My Profile</a>
+          </li>
+          <li>
+            <a class="logout-link" href="login.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <main id="main" class="account-main">
+      <h1>Profile &amp; Account Settings</h1>
+
+      <section class="profile-summary" aria-labelledby="profile-summary-title">
+        <h2 id="profile-summary-title">My Information</h2>
+        <div class="profile-top">
+          <img id="profile-photo-view" class="profile-photo" src="images/profile-placeholder.svg" alt="Your profile picture" width="120" height="120">
+          <div>
+            <h3 id="profile-name-view">Your Name</h3>
+            <p id="profile-role-view">Account role</p>
+            <p id="profile-email-view">Email address</p>
+          </div>
+        </div>
+
+        <dl class="profile-details">
+          <div>
+            <dt>Gender</dt>
+            <dd id="profile-gender-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Date of Birth</dt>
+            <dd id="profile-dob-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd id="profile-contact-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Address</dt>
+            <dd id="profile-address-view">Not provided</dd>
+          </div>
+          <div>
+            <dt>Account Status</dt>
+            <dd id="profile-status-view">Not provided</dd>
+          </div>
+        </dl>
+
+        <nav class="profile-actions" aria-label="Profile actions">
+          <a class="button-link" href="#profile-update">Update Profile</a>
+          <a class="button-link" href="#change-password">Change Password</a>
+          <a class="button-link danger-link" href="#delete-account">Delete Account</a>
+        </nav>
+      </section>
+
+      <section id="profile-update">
+        <h2>Update Profile Information</h2>
+        <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="users" data-id-field="user_id" data-match="email">
+          <input type="hidden" id="profile-user-id" name="user_id">
+          <input type="hidden" id="profile-role" name="role">
+          <fieldset>
+            <legend>Personal Details</legend>
+            <div>
+              <label for="profile-name">Full Name</label>
+              <input id="profile-name" name="name" autocomplete="name" required>
+            </div>
+            <div>
+              <label for="profile-gender">Gender</label>
+              <select id="profile-gender" name="gender" required>
+                <option value="">Select gender</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div>
+              <label for="profile-dob">Date of Birth</label>
+              <input id="profile-dob" name="dob" type="date" required>
+            </div>
+            <div>
+              <label for="profile-contact">Contact</label>
+              <input id="profile-contact" name="contact" type="tel" autocomplete="tel" required>
+            </div>
+            <div>
+              <label for="profile-email">Email</label>
+              <input id="profile-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div>
+              <label for="profile-address">Address</label>
+              <textarea id="profile-address" name="address" autocomplete="street-address" rows="3" required></textarea>
+            </div>
+            <div>
+              <label for="profile-picture">Upload or Change Profile Picture</label>
+              <input id="profile-picture" name="profile_picture" type="file" accept="image/*">
+            </div>
+          </fieldset>
+          <button type="submit">Save Profile Changes</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="change-password">
+        <h2>Change Password</h2>
+        <form action="#" method="post" data-action="change-password">
+          <div>
+            <label for="current-password">Current Password</label>
+            <input id="current-password" name="current_password" type="password" autocomplete="current-password" required>
+          </div>
+          <div>
+            <label for="new-password">New Password</label>
+            <input id="new-password" name="new_password" type="password" autocomplete="new-password" minlength="6" required>
+          </div>
+          <div>
+            <label for="confirm-password">Confirm New Password</label>
+            <input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required>
+          </div>
+          <button type="submit">Change Password</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="delete-account" class="delete-section">
+        <h2>Delete Account</h2>
+        <form action="#" method="post" data-action="delete-account">
+          <div>
+            <label for="delete-account-email">Enter your account email</label>
+            <input id="delete-account-email" name="email" type="email" required>
+          </div>
+          <button class="danger-button" type="submit">Delete Account</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="index.html">Home</a>
+          <a href="login.html">Login</a>
+          <a href="register.html">Register</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
+
