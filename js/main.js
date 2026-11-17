@@ -14,6 +14,26 @@ function writeRecords(collection, records) {
     localStorage.setItem(storagePrefix + collection, JSON.stringify(records));
 }
 
+function getCurrentUser() {
+    try { return JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null"); }
+    catch (error) { return null; }
+}
+
+function isRecruiterPage() {
+    return window.location.pathname.toLowerCase().includes("/recruiter/");
+}
+
+function recruiterJobs() {
+    const user = getCurrentUser();
+    if (!user) return [];
+    return readRecords("job_posts").filter(job => String(job.user_id) === String(user.user_id));
+}
+
+function recruiterApplications() {
+    const jobIds = recruiterJobs().map(job => String(job.job_id || job.id));
+    return readRecords("applications").filter(application => jobIds.includes(String(application.job_id)));
+}
+
 function showMessage(form, message, isError = false) {
     let output = form.querySelector(".form-status");
     if (!output) {
@@ -53,6 +73,10 @@ function saveRecord(form, uploadedImage) {
     const record = collectFormValues(form);
     const defaults = JSON.parse(form.dataset.defaults || "{}");
     Object.assign(record, defaults);
+    const currentUser = getCurrentUser();
+    if (currentUser && currentUser.user_id && ["job_posts", "companies", "applicant_reviews"].includes(collection)) {
+        record.user_id = currentUser.user_id;
+    }
 
     if (uploadedImage) {
         const imageInput = form.querySelector('input[type="file"]');
@@ -78,11 +102,20 @@ function saveRecord(form, uploadedImage) {
     const requestedId = record[idField];
     const matchField = form.dataset.match;
     const matchIndex = matchField && record[matchField]
-        ? records.findIndex(item => item[matchField] === record[matchField])
+        ? records.findIndex(item => String(item[matchField]) === String(record[matchField]))
         : -1;
-    const existingIndex = requestedId
+    let existingIndex = requestedId
         ? records.findIndex(item => String(item[idField]) === String(requestedId))
         : matchIndex;
+    if (existingIndex >= 0 && isRecruiterPage() && currentUser &&
+        String(records[existingIndex].user_id) !== String(currentUser.user_id)) {
+        showMessage(form, "You can only edit your own records.", true);
+        return;
+    }
+
+    if (existingIndex >= 0 && !window.confirm("Are you sure you want to update this information?")) {
+        return;
+    }
 
     if (!record[idField]) {
         record[idField] = existingIndex >= 0
@@ -98,6 +131,24 @@ function saveRecord(form, uploadedImage) {
 
     try {
         writeRecords(collection, records);
+
+        if (collection === "applicant_reviews" && record.application_id) {
+            const applications = readRecords("applications");
+            const applicationIndex = applications.findIndex(item =>
+                String(item.application_id) === String(record.application_id)
+            );
+            if (applicationIndex >= 0) {
+                if (record.shortlist_status === "Shortlisted") {
+                    applications[applicationIndex].application_status = "Shortlisted";
+                } else if (record.shortlist_status === "Not shortlisted") {
+                    applications[applicationIndex].application_status = "Rejected";
+                } else if (record.review_status === "Reviewed" &&
+                    applications[applicationIndex].application_status === "Submitted") {
+                    applications[applicationIndex].application_status = "Reviewed";
+                }
+                writeRecords("applications", applications);
+            }
+        }
 
         if (collection === "users") {
             const currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
@@ -117,6 +168,9 @@ function saveRecord(form, uploadedImage) {
 }
 
 function deleteRecord(form) {
+    if (!window.confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
+        return;
+    }
     const collection = form.dataset.deleteCollection || form.dataset.collection;
     const key = form.dataset.deleteField || "id";
     const target = collectFormValues(form)[key];
@@ -127,7 +181,18 @@ function deleteRecord(form) {
     }
 
     const records = readRecords(collection);
-    const filtered = records.filter(item => String(item[key] || item.id) !== String(target));
+    const currentUser = getCurrentUser();
+    const targetRecord = records.find(item => String(item[key] || item.id) === String(target));
+    if (targetRecord && isRecruiterPage() && currentUser && String(targetRecord.user_id) !== String(currentUser.user_id)) {
+        showMessage(form, "You can only delete your own records.", true);
+        return;
+    }
+    const filtered = records.filter(item => {
+        const matches = String(item[key] || item.id) === String(target);
+        if (!matches) return true;
+        if (isRecruiterPage() && currentUser) return String(item.user_id) !== String(currentUser.user_id);
+        return false;
+    });
     if (filtered.length === records.length) {
         showMessage(form, "No matching record was found.", true);
         return;
@@ -136,6 +201,64 @@ function deleteRecord(form) {
     writeRecords(collection, filtered);
     renderDynamicContent();
     showMessage(form, "Record removed.");
+}
+
+function updateMainNavigation() {
+    const nav = document.querySelector(".main-nav");
+    if (!nav) return;
+
+    const currentUser = getCurrentUser();
+    const oldLogin = nav.querySelector('a[href="login.html"]');
+    const oldRegister = nav.querySelector('a[href="register.html"]');
+
+    if (!currentUser) {
+        if (oldLogin) oldLogin.hidden = false;
+        if (oldRegister) oldRegister.hidden = false;
+        return;
+    }
+
+    if (oldLogin) oldLogin.remove();
+    if (oldRegister) oldRegister.remove();
+
+    const dashboards = {
+        Recruiter: "recruiter/dashboard.html",
+        "Job Seeker": "job-seeker/dashboard.html",
+        "HR Manager": "hr-manager/dashboard.html",
+        Admin: "admin/dashboard.html"
+    };
+
+    let dashboardLink = nav.querySelector(".account-dashboard-link");
+    if (!dashboardLink) {
+        dashboardLink = document.createElement("a");
+        dashboardLink.className = "nav-button account-dashboard-link";
+        nav.append(dashboardLink);
+    }
+    dashboardLink.href = dashboards[currentUser.role] || "profile.html";
+    dashboardLink.textContent = "Dashboard";
+
+    let profileLink = nav.querySelector(".account-profile-link");
+    if (!profileLink) {
+        profileLink = document.createElement("a");
+        profileLink.className = "nav-button account-profile-link";
+        profileLink.href = "profile.html";
+        profileLink.textContent = "My Profile";
+        nav.append(profileLink);
+    }
+
+    let logoutLink = nav.querySelector(".account-logout-link");
+    if (!logoutLink) {
+        logoutLink = document.createElement("a");
+        logoutLink.className = "nav-button account-logout-link";
+        logoutLink.href = "login.html";
+        logoutLink.textContent = "Logout";
+        logoutLink.addEventListener("click", event => {
+            event.preventDefault();
+            if (!window.confirm("Are you sure you want to log out?")) return;
+            localStorage.removeItem("jobPortal:currentUser");
+            window.location.href = "login.html";
+        });
+        nav.append(logoutLink);
+    }
 }
 
 function renderHeaderProfile() {
@@ -231,38 +354,49 @@ function renderProfileInformation() {
 }
 
 function renderCompanyProfile() {
+    const summary = document.querySelector("#company-summary");
     const nameOutput = document.querySelector("#company-name-view");
     if (!nameOutput) return;
 
-    let currentUser = null;
-    try {
-        currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
-    } catch (error) {
-        currentUser = null;
-    }
-
+    const currentUser = getCurrentUser();
     const companies = readRecords("companies");
     let company = null;
+
     if (currentUser && currentUser.user_id) {
-        company = companies.find(item => String(item.user_id) === String(currentUser.user_id));
+        company = companies.find(item =>
+            String(item.user_id) === String(currentUser.user_id)
+        );
     }
 
-    const companyName = company ? company.company_name : "Your Company";
-    const companyLocation = company ? company.company_location : "408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh";
-    const companyInformation = company ? company.company_information : "Add a short description about your company.";
+    // Show only the signed-in recruiter's own saved company.
+    nameOutput.textContent = company && company.company_name
+        ? company.company_name
+        : "No company profile yet";
 
-    nameOutput.textContent = companyName || "Your Company";
-    document.querySelector("#company-location-view").textContent = companyLocation || "Location not added yet";
-    document.querySelector("#company-information-view").textContent = companyInformation || "Company information not added yet";
+    const location = document.querySelector("#company-location-view");
+    const information = document.querySelector("#company-information-view");
+    const contact = document.querySelector("#company-contact-view");
+
+    if (location) {
+        location.textContent = company && company.company_location
+            ? company.company_location
+            : "Create your company profile to add a location.";
+    }
+
+    if (information) {
+        information.textContent = company && company.company_information
+            ? company.company_information
+            : "No company information has been added yet.";
+    }
 
     const recruiter = currentUser && readRecords("users").find(item =>
         String(item.user_id) === String(currentUser.user_id)
     );
-    const contact = document.querySelector("#company-contact-view");
+
     if (contact) {
         contact.textContent = recruiter
-            ? [recruiter.contact, recruiter.email].filter(Boolean).join(" · ") || "Contact information not added yet"
-            : "Log in to show your contact information.";
+            ? [recruiter.contact, recruiter.email].filter(Boolean).join(" · ").replace(/\u00C2/g, "").trim() || "Recruiter contact not added yet."
+            : "Recruiter contact not available.";
     }
 
     const logo = document.querySelector("#company-logo-view");
@@ -275,32 +409,33 @@ function renderCompanyProfile() {
 
     const form = document.querySelector('form[data-collection="companies"]');
     if (form) {
-        const fields = ["company_id", "user_id", "company_name", "company_location", "company_information"];
-        fields.forEach(fieldName => {
+        ["company_id", "user_id", "company_name", "company_location", "company_information"].forEach(fieldName => {
             const field = form.elements.namedItem(fieldName);
             if (!field) return;
-
-            if (company && company[fieldName]) {
-                field.value = company[fieldName];
-            } else if (fieldName === "company_location") {
-                field.value = "408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh";
-            } else if (fieldName !== "user_id") {
-                field.value = "";
-            }
+            field.value = company && company[fieldName] ? company[fieldName] : "";
         });
-        if (currentUser && currentUser.user_id) {
-            const userId = form.elements.namedItem("user_id");
-            if (userId) userId.value = currentUser.user_id;
-        }
+
+        const userId = form.elements.namedItem("user_id");
+        if (userId) userId.value = currentUser ? currentUser.user_id : "";
+
+        const companyId = form.elements.namedItem("company_id");
+        if (companyId) companyId.value = company ? company.company_id || "" : "";
     }
 
     const deleteId = document.querySelector("#delete-company-id");
     if (deleteId) deleteId.value = company ? company.company_id || "" : "";
+
+    // Reveal the company information only after the correct user's data is loaded.
+    if (summary) summary.hidden = false;
 }
 
 function renderDynamicContent() {
     document.querySelectorAll("[data-record-list]").forEach(list => {
-        const records = readRecords(list.dataset.recordList);
+        let records = readRecords(list.dataset.recordList);
+        const currentUser = getCurrentUser();
+        if (isRecruiterPage() && currentUser && ["job_posts", "companies", "applicant_reviews"].includes(list.dataset.recordList)) {
+            records = records.filter(item => String(item.user_id) === String(currentUser.user_id));
+        }
         const fields = (list.dataset.fields || "").split(",").filter(Boolean);
         list.replaceChildren();
 
@@ -338,6 +473,14 @@ function renderDynamicContent() {
 
     document.querySelectorAll("[data-record-count]").forEach(output => {
         let records = readRecords(output.dataset.recordCount);
+        if (isRecruiterPage()) {
+            if (output.dataset.recordCount === "job_posts") records = recruiterJobs();
+            if (output.dataset.recordCount === "applications") records = recruiterApplications();
+            if (output.dataset.recordCount === "applicant_reviews") {
+                const user = getCurrentUser();
+                records = records.filter(item => String(item.user_id) === String(user?.user_id));
+            }
+        }
         if (output.dataset.filterField) {
             records = records.filter(item => String(item[output.dataset.filterField]).toLowerCase() === output.dataset.filterValue.toLowerCase());
         }
@@ -346,6 +489,14 @@ function renderDynamicContent() {
 
     document.querySelectorAll("[data-metric]").forEach(output => {
         let records = readRecords(output.dataset.metric);
+        if (isRecruiterPage()) {
+            if (output.dataset.metric === "job_posts") records = recruiterJobs();
+            if (output.dataset.metric === "applications") records = recruiterApplications();
+            if (output.dataset.metric === "applicant_reviews") {
+                const user = getCurrentUser();
+                records = records.filter(item => String(item.user_id) === String(user?.user_id));
+            }
+        }
 
         if (output.dataset.filterField) {
             records = records.filter(item => String(item[output.dataset.filterField] || "").toLowerCase() === output.dataset.filterValue.toLowerCase());
@@ -356,6 +507,7 @@ function renderDynamicContent() {
 
     renderApplications();
 
+    updateMainNavigation();
     populateSelectOptions();
     renderJobCards();
     renderCompanyProfile();
@@ -364,35 +516,44 @@ function renderDynamicContent() {
 
 function renderApplications() {
     document.querySelectorAll("[data-application-list]").forEach(list => {
-        const applications = readRecords("applications");
+        const applications = isRecruiterPage() ? recruiterApplications() : readRecords("applications");
         const jobs = readRecords("job_posts");
         const isSummary = list.dataset.applicationList === "summary";
         list.replaceChildren();
-
         if (applications.length === 0) {
             const row = document.createElement("tr");
             const cell = document.createElement("td");
-            cell.colSpan = isSummary ? 3 : 7;
+            cell.colSpan = isSummary ? 3 : 8;
             cell.textContent = "No applications found.";
-            row.append(cell);
-            list.append(row);
-            return;
+            row.append(cell); list.append(row); return;
         }
-
         applications.forEach(application => {
             const job = jobs.find(item => String(item.job_id || item.id) === String(application.job_id));
             const row = document.createElement("tr");
             const values = isSummary
                 ? [application.name, job?.title || application.job_id, application.application_status || "Submitted"]
                 : [application.application_id, application.name, application.email, job?.title || application.job_id,
-                    application.application_status || "Submitted", application.resume_file || "", application.message || ""];
-
-            values.forEach(value => {
-                const cell = document.createElement("td");
-                cell.textContent = value || "";
-                row.append(cell);
-            });
-
+                   application.application_status || "Submitted", application.resume_file || "", application.message || ""];
+            values.forEach(value => { const cell=document.createElement("td"); cell.textContent=value || ""; row.append(cell); });
+            if (!isSummary && isRecruiterPage()) {
+                const cell=document.createElement("td");
+                const select=document.createElement("select");
+                ["Submitted", "Reviewed", "Shortlisted", "Rejected", "Withdrawn"].forEach(status => {
+                    const option=document.createElement("option"); option.value=status; option.textContent=status;
+                    option.selected=(application.application_status || "Submitted")===status; select.append(option);
+                });
+                const button=document.createElement("button"); button.type="button"; button.textContent="Update";
+                button.addEventListener("click", () => {
+                    const all=readRecords("applications");
+                    const index=all.findIndex(item => String(item.application_id)===String(application.application_id));
+                    if(index<0) return;
+                    if (!window.confirm("Are you sure you want to update this application status?")) return;
+                    all[index].application_status=select.value;
+                    all[index].updated_at=new Date().toLocaleString();
+                    writeRecords("applications", all); renderApplications();
+                });
+                cell.append(select, button); row.append(cell);
+            }
             list.append(row);
         });
     });
@@ -405,7 +566,15 @@ function populateSelectOptions() {
         const valueField = select.dataset.valueField || "id";
         const existingValues = new Set([...select.options].map(option => option.value));
 
-        readRecords(collection).forEach(record => {
+        let optionRecords = readRecords(collection);
+        if (isRecruiterPage() && ["companies", "job_posts", "applications"].includes(collection)) {
+            if (collection === "applications") optionRecords = recruiterApplications();
+            else {
+                const user = getCurrentUser();
+                optionRecords = optionRecords.filter(item => String(item.user_id) === String(user?.user_id));
+            }
+        }
+        optionRecords.forEach(record => {
             const value = record[valueField] || record.id || "";
             if (!value || existingValues.has(value)) return;
             const option = document.createElement("option");
@@ -568,8 +737,17 @@ function setupForms() {
                     const imageFile = imageInput && imageInput.files[0];
 
                     if (imageFile) {
+                        if (!imageFile.type.startsWith("image/")) {
+                            showMessage(form, "Please choose an image file.", true);
+                            return;
+                        }
+                        if (imageFile.size > 2 * 1024 * 1024) {
+                            showMessage(form, "Image size must be 2 MB or less.", true);
+                            return;
+                        }
                         const reader = new FileReader();
                         reader.onload = () => saveRecord(form, reader.result);
+                        reader.onerror = () => showMessage(form, "Could not read the selected image.", true);
                         reader.readAsDataURL(imageFile);
                     } else {
                         saveRecord(form);
@@ -580,31 +758,71 @@ function setupForms() {
             } else if (action === "login") {
                 showMessage(form, "Login successful.");
             } else if (action === "password-reset") {
-                showMessage(form, "Password reset request received.");
-            } else if (action === "change-password") {
-                showMessage(form, "Password updated.");
-            } else if (action === "delete-account") {
-                const email = collectFormValues(form).email;
+                const email = form.elements.namedItem("email").value.trim().toLowerCase();
+                const newPassword = form.elements.namedItem("new_password").value;
+                const confirmPassword = form.elements.namedItem("confirm_password").value;
+                if (newPassword !== confirmPassword) { showMessage(form, "New passwords do not match.", true); return; }
                 const users = readRecords("users");
-                const remainingUsers = users.filter(user => String(user.email).toLowerCase() !== String(email || "").toLowerCase());
-
-                if (remainingUsers.length === users.length) {
-                    showMessage(form, "No account matched that email address.", true);
-                    return;
+                const index = users.findIndex(user => String(user.email).toLowerCase() === email);
+                if (index < 0) { showMessage(form, "No account was found with this email address.", true); return; }
+                if (!window.confirm("Are you sure you want to reset your password?")) return;
+                users[index].password = newPassword;
+                writeRecords("users", users);
+                showMessage(form, "Password changed. You can now log in."); form.reset();
+            } else if (action === "change-password") {
+                const currentUser = getCurrentUser();
+                const users = readRecords("users");
+                const index = users.findIndex(user => currentUser && String(user.user_id) === String(currentUser.user_id));
+                const oldPassword = form.elements.namedItem("current_password").value;
+                const newPassword = form.elements.namedItem("new_password").value;
+                const confirmPassword = form.elements.namedItem("confirm_password").value;
+                if (index < 0 || users[index].password !== oldPassword) { showMessage(form, "Current password is incorrect.", true); return; }
+                if (newPassword !== confirmPassword) { showMessage(form, "New passwords do not match.", true); return; }
+                if (!window.confirm("Are you sure you want to change your password?")) return;
+                users[index].password = newPassword; writeRecords("users", users);
+                showMessage(form, "Password updated successfully."); form.reset();
+            } else if (action === "delete-account") {
+                const currentUser = getCurrentUser();
+                const email = form.elements.namedItem("email").value.trim().toLowerCase();
+                if (!currentUser || email !== String(currentUser.email).toLowerCase()) {
+                    showMessage(form, "Enter the email address of your logged-in account.", true); return;
                 }
-
-                writeRecords("users", remainingUsers);
-                const currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
-                if (currentUser && String(currentUser.email).toLowerCase() === String(email).toLowerCase()) {
-                    localStorage.removeItem("jobPortal:currentUser");
-                }
-                showMessage(form, "Account deleted.");
+                if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) return;
+                const ownedJobIds = readRecords("job_posts")
+                    .filter(item => String(item.user_id) === String(currentUser.user_id))
+                    .map(item => String(item.job_id || item.id));
+                writeRecords("users", readRecords("users").filter(user => String(user.user_id) !== String(currentUser.user_id)));
+                ["job_posts", "companies", "applicant_reviews"].forEach(collection => {
+                    writeRecords(collection, readRecords(collection).filter(item => String(item.user_id) !== String(currentUser.user_id)));
+                });
+                writeRecords("applications", readRecords("applications").filter(item => !ownedJobIds.includes(String(item.job_id))));
+                localStorage.removeItem("jobPortal:currentUser");
+                showMessage(form, "Your account has been deleted. Redirecting to login...");
+                window.setTimeout(() => window.location.href = "login.html", 700);
             }
         });
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    const user = getCurrentUser();
+    const path = window.location.pathname.toLowerCase();
+    const roleFolders = {
+        "/recruiter/": "Recruiter",
+        "/job-seeker/": "Job Seeker",
+        "/hr-manager/": "HR Manager",
+        "/admin/": "Admin"
+    };
+    const requiredRole = Object.keys(roleFolders).find(folder => path.includes(folder));
+    if (requiredRole && (!user || user.role !== roleFolders[requiredRole] || user.status !== "Active")) {
+        window.location.href = "../login.html";
+        return;
+    }
+    if (path.endsWith("/profile.html") && !user) {
+        window.location.href = "login.html";
+        return;
+    }
+    updateMainNavigation();
     populateSelectOptions();
     renderJobCards();
     renderDynamicContent();
@@ -617,9 +835,20 @@ document.addEventListener("DOMContentLoaded", () => {
     setupJobSearch();
     setupForms();
 
+    const loggedInUser = getCurrentUser();
+    if (loggedInUser) {
+        ["recruiter-user-id", "reviewer-user-id", "company-user-id"].forEach(id => {
+            const field = document.getElementById(id);
+            if (field) { field.value = loggedInUser.user_id || ""; field.readOnly = true; }
+        });
+    }
+
     document.querySelectorAll(".logout-link").forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", event => {
+            event.preventDefault();
+            if (!window.confirm("Are you sure you want to log out?")) return;
             localStorage.removeItem("jobPortal:currentUser");
+            window.location.href = link.href;
         });
     });
 });

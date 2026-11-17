@@ -820,3 +820,28 @@ body.dashboard-page > aside nav .logout-link:hover {
     background: var(--danger) !important;
     text-decoration: none;
 }
+
+
+/* Destructive and password-recovery actions use red styling. */
+button.danger,
+button.danger-button,
+.danger-button,
+.danger-link,
+.forgot-button,
+a.logout-link,
+button.logout-link {
+    color: #a92d2d !important;
+    border-color: #a92d2d !important;
+    background: #fff4f4 !important;
+}
+
+button.danger:hover,
+button.danger-button:hover,
+.danger-button:hover,
+.danger-link:hover,
+.forgot-button:hover,
+a.logout-link:hover,
+button.logout-link:hover {
+    color: #ffffff !important;
+    background: #a92d2d !important;
+}
