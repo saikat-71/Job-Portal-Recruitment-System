@@ -47,15 +47,16 @@ function collectFormValues(form) {
     return values;
 }
 
-function saveRecord(form, profilePicture) {
+function saveRecord(form, uploadedImage) {
     const collection = form.dataset.collection;
     const records = readRecords(collection);
     const record = collectFormValues(form);
     const defaults = JSON.parse(form.dataset.defaults || "{}");
     Object.assign(record, defaults);
 
-    if (profilePicture) {
-        record.profile_picture = profilePicture;
+    if (uploadedImage) {
+        const imageInput = form.querySelector('input[type="file"]');
+        if (imageInput) record[imageInput.name] = uploadedImage;
     }
 
     if (collection === "users") {
@@ -107,7 +108,9 @@ function saveRecord(form, profilePicture) {
 
         renderDynamicContent();
         renderProfileInformation();
-        showMessage(form, "Profile information saved.");
+        renderCompanyProfile();
+        renderHeaderProfile();
+        showMessage(form, "Information saved.");
     } catch (error) {
         showMessage(form, "The record could not be saved.", true);
     }
@@ -133,6 +136,44 @@ function deleteRecord(form) {
     writeRecords(collection, filtered);
     renderDynamicContent();
     showMessage(form, "Record removed.");
+}
+
+function renderHeaderProfile() {
+    const photo = document.querySelector("#header-profile-photo");
+    if (!photo) return;
+
+    let currentUser = null;
+    try {
+        currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+    } catch (error) {
+        currentUser = null;
+    }
+
+    let user = currentUser;
+    if (currentUser) {
+        const savedUsers = readRecords("users");
+        const savedUser = savedUsers.find(item =>
+            (currentUser.user_id && item.user_id === currentUser.user_id) ||
+            String(item.email || "").toLowerCase() === String(currentUser.email || "").toLowerCase()
+        );
+        if (savedUser) user = savedUser;
+    }
+
+    const name = document.querySelector("#header-profile-name");
+    const role = document.querySelector("#header-profile-role");
+
+    if (user) {
+        if (name) name.textContent = user.name || "JobPortal User";
+        if (role) role.textContent = user.role || "Member";
+        if (user.profile_picture && user.profile_picture.startsWith("data:image/")) {
+            photo.src = user.profile_picture;
+        }
+        photo.alt = user.name ? user.name + " profile picture" : "User profile picture";
+    } else {
+        if (name) name.textContent = "Guest User";
+        if (role) role.textContent = "Welcome";
+        photo.alt = "Default user picture";
+    }
 }
 
 function renderProfileInformation() {
@@ -174,7 +215,11 @@ function renderProfileInformation() {
     showValue("profile-status-view", user.status);
 
     const photo = document.querySelector("#profile-photo-view");
-    if (photo) photo.src = user.profile_picture || "images/profile-placeholder.svg";
+    if (photo) {
+        photo.src = user.profile_picture && user.profile_picture.startsWith("data:image/")
+            ? user.profile_picture
+            : "images/profile-placeholder.svg";
+    }
 
     const profileForm = document.querySelector('form[data-collection="users"]');
     if (profileForm) {
@@ -183,6 +228,74 @@ function renderProfileInformation() {
             if (field && user[name]) field.value = user[name];
         });
     }
+}
+
+function renderCompanyProfile() {
+    const nameOutput = document.querySelector("#company-name-view");
+    if (!nameOutput) return;
+
+    let currentUser = null;
+    try {
+        currentUser = JSON.parse(localStorage.getItem("jobPortal:currentUser") || "null");
+    } catch (error) {
+        currentUser = null;
+    }
+
+    const companies = readRecords("companies");
+    let company = null;
+    if (currentUser && currentUser.user_id) {
+        company = companies.find(item => String(item.user_id) === String(currentUser.user_id));
+    }
+
+    const companyName = company ? company.company_name : "Your Company";
+    const companyLocation = company ? company.company_location : "408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh";
+    const companyInformation = company ? company.company_information : "Add a short description about your company.";
+
+    nameOutput.textContent = companyName || "Your Company";
+    document.querySelector("#company-location-view").textContent = companyLocation || "Location not added yet";
+    document.querySelector("#company-information-view").textContent = companyInformation || "Company information not added yet";
+
+    const recruiter = currentUser && readRecords("users").find(item =>
+        String(item.user_id) === String(currentUser.user_id)
+    );
+    const contact = document.querySelector("#company-contact-view");
+    if (contact) {
+        contact.textContent = recruiter
+            ? [recruiter.contact, recruiter.email].filter(Boolean).join(" · ") || "Contact information not added yet"
+            : "Log in to show your contact information.";
+    }
+
+    const logo = document.querySelector("#company-logo-view");
+    if (logo) {
+        const savedLogo = company && company.company_logo;
+        logo.src = savedLogo && savedLogo.startsWith("data:image/")
+            ? savedLogo
+            : "../images/company-placeholder.svg";
+    }
+
+    const form = document.querySelector('form[data-collection="companies"]');
+    if (form) {
+        const fields = ["company_id", "user_id", "company_name", "company_location", "company_information"];
+        fields.forEach(fieldName => {
+            const field = form.elements.namedItem(fieldName);
+            if (!field) return;
+
+            if (company && company[fieldName]) {
+                field.value = company[fieldName];
+            } else if (fieldName === "company_location") {
+                field.value = "408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh";
+            } else if (fieldName !== "user_id") {
+                field.value = "";
+            }
+        });
+        if (currentUser && currentUser.user_id) {
+            const userId = form.elements.namedItem("user_id");
+            if (userId) userId.value = currentUser.user_id;
+        }
+    }
+
+    const deleteId = document.querySelector("#delete-company-id");
+    if (deleteId) deleteId.value = company ? company.company_id || "" : "";
 }
 
 function renderDynamicContent() {
@@ -205,7 +318,18 @@ function renderDynamicContent() {
             const row = document.createElement("tr");
             fields.forEach(field => {
                 const cell = document.createElement("td");
-                cell.textContent = record[field] ?? "";
+                const value = record[field] ?? "";
+
+                if (field === "company_logo" && String(value).startsWith("data:image/")) {
+                    const logo = document.createElement("img");
+                    logo.src = value;
+                    logo.alt = "Company logo";
+                    logo.width = 48;
+                    logo.height = 48;
+                    cell.append(logo);
+                } else {
+                    cell.textContent = value;
+                }
                 row.append(cell);
             });
             list.append(row);
@@ -234,6 +358,8 @@ function renderDynamicContent() {
 
     populateSelectOptions();
     renderJobCards();
+    renderCompanyProfile();
+    renderHeaderProfile();
 }
 
 function renderApplications() {
@@ -438,13 +564,13 @@ function setupForms() {
                 if (intent.includes("remove") || intent.includes("delete")) {
                     deleteRecord(form);
                 } else {
-                    const photoInput = form.querySelector('input[name="profile_picture"]');
-                    const photoFile = photoInput && photoInput.files[0];
+                    const imageInput = form.querySelector('input[type="file"]');
+                    const imageFile = imageInput && imageInput.files[0];
 
-                    if (photoFile) {
+                    if (imageFile) {
                         const reader = new FileReader();
                         reader.onload = () => saveRecord(form, reader.result);
-                        reader.readAsDataURL(photoFile);
+                        reader.readAsDataURL(imageFile);
                     } else {
                         saveRecord(form);
                     }
@@ -483,6 +609,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderJobCards();
     renderDynamicContent();
     renderProfileInformation();
+    renderCompanyProfile();
+    renderHeaderProfile();
     prefillApplicationJob();
     renderJobDetails();
     setupPasswordConfirmation();

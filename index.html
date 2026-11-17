@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Explore job opportunities and find your next career step.">
@@ -16,12 +17,13 @@
         </a>
         <nav class="main-nav" aria-label="Main navigation">
           <a href="index.html">Home</a>
-          <a href="#featured-jobs">Job</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="index.html#featured-jobs">Jobs</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
           <a class="nav-button" href="login.html">Login</a>
           <a class="nav-button" href="register.html">Sign up</a>
         </nav>
+        <span class="header-space" aria-hidden="true"></span>
       </div>
     </header>
     <main class="container">
@@ -110,18 +112,39 @@
           </a>
         </div>
       </section>
-      <section class="info-section" id="contact">
-        <h2>Contact</h2>
-        <p>Job Portal</p>
+      <section class="info-section" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <div class="contact-layout">
+          <div class="contact-left">
+            <iframe
+              class="contact-map"
+              src="https://maps.google.com/maps?q=AIUB%20Kuratoli%20Khilkhet%20Dhaka%201229&output=embed"
+              title="Map showing the AIUB campus location"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <address class="contact-details">
+              <p><strong>JobPortal - Job Portal &amp; Recruitment System</strong></p>
+              <p>408/1 (Old KA 66/1), Kuratoli, Khilkhet, Dhaka 1229, Bangladesh</p>
+              <p><strong>Phone:</strong> <a href="tel:+8801234567890">+88 01234-567890</a></p>
+              <p><strong>Email:</strong> <a href="mailto:info@jobportal.com">info@jobportal.com</a></p>
+            </address>
+          </div>
+          <aside class="contact-quote" aria-label="Career motivation">
+            <p class="quote-label">A NOTE FOR YOUR JOURNEY</p>
+            <blockquote>“Small steps today can lead to meaningful opportunities tomorrow.”</blockquote>
+            <p class="quote-caption">Keep learning. Keep moving forward.</p>
+          </aside>
+        </div>
       </section>
     </main>
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p>Job Portal</p>
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
         <nav aria-label="Footer navigation">
           <a href="index.html">Home</a>
           <a href="login.html">Login</a>
-          <a href="register.html">Sign up</a>
+          <a href="register.html">Register</a>
         </nav>
       </div>
     </footer>

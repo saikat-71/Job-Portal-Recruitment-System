@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Applicant Management | JobPortal</title>
@@ -13,9 +14,16 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="../index.html">
-          <img src="../images/logo.svg" alt="JobPortal" width="165" height="38">
+          <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
         </a>
-        <p>Recruiter workspace</p>
+        <p class="header-title">Applicant Management</p>
+        <div class="header-profile">
+          <img class="header-profile-photo" id="header-profile-photo" src="../images/profile-placeholder.svg" alt="" width="48" height="48">
+          <div class="header-profile-info">
+            <strong id="header-profile-name">Guest User</strong>
+            <span id="header-profile-role">Login to view your account</span>
+          </div>
+        </div>
       </div>
     </header>
     <div class="dashboard-layout">
@@ -151,8 +159,14 @@
       </main>
     </div>
     <footer class="site-footer">
-      <p>Job Portal</p>
+      <div class="container footer-inner">
+        <p>JobPortal - Job Portal &amp; Recruitment System</p>
+        <nav aria-label="Footer navigation">
+          <a href="../index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="../profile.html">My Profile</a>
+        </nav>
+      </div>
     </footer>
   </body>
 </html>
-
