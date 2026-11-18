@@ -4,7 +4,6 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="icon" href="../images/favicon.svg">
-
 </head>
 
 <body>
@@ -17,12 +16,11 @@
         <div class="user-info">
             <img src="../images/profile-placeholder.svg" alt="Profile">
             <div>
-                <h4>JobPortal User</h4>
+                <h4 id="headerName">JobPortal User</h4>
                 <p>Admin Dashboard</p>
             </div>
         </div>
     </div>
-
 
     <div class="sidebar">
         <a href="dashboard.html" class="active">Dashboard</a>
@@ -33,53 +31,95 @@
         <a href="../login.html">Logout</a>
     </div>
 
-
     <div class="main">
-        <h1>Admin Dashboard</h1>
+        <div id="dashboardContent">
+            <h1>Admin Dashboard</h1>
+            <div class="profile-button-container">
+                <button type="button" id="viewProfileBtn" class="view-profile-btn"> View Profile </button>
+            </div>
 
-        <div class="cards">
-            <div class="card">
-                <h3>Total Users</h3>
-                <h2>45</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Users</h3>
+                    <h2>45</h2>
+                </div>
+                <div class="card">
+                    <h3>Recruiters</h3>
+                    <h2>12</h2>
+                </div>
+                <div class="card">
+                    <h3>Job Seekers</h3>
+                    <h2>28</h2>
+                </div>
+                <div class="card">
+                    <h3>Job Posts</h3>
+                    <h2>18</h2>
+                </div>
             </div>
-            <div class="card">
-                <h3>Recruiters</h3>
-                <h2>12</h2>
+
+            <div class="recent-users">
+                <h2>Recent Users</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Rahim Ahmed</td>
+                        <td>Recruiter</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Aysha Khan</td>
+                        <td>Job Seeker</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Tanvir Hasan</td>
+                        <td>Job Seeker</td>
+                        <td>Inactive</td>
+                    </tr>
+                </table>
             </div>
-            <div class="card">
-                <h3>Job Seekers</h3>
-                <h2>28</h2>
-            </div>
-            <div class="card">
-                <h3>Job Posts</h3>
-                <h2>18</h2>
-            </div>
+
         </div>
 
-        <div class="recent-users">
-            <h2>Recent Users</h2>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>Rahim Ahmed</td>
-                    <td>Recruiter</td>
-                    <td>Active</td>
-                </tr>
-                <tr>
-                    <td>Aysha Khan</td>
-                    <td>Job Seeker</td>
-                    <td>Active</td>
-                </tr>
-                <tr>
-                    <td>Tanvir Hasan</td>
-                    <td>Job Seeker</td>
-                    <td>Inactive</td>
-                </tr>
-            </table>
+        <div id="profileSection" style="display:none;">
+            <h1>My Profile</h1>
+            <form id="adminProfileForm">
+                <label>Full Name</label>
+                <input type="text" id="profileName" required disabled>
+
+                <label>Email</label>
+                <input type="email" id="profileEmail" required disabled>
+
+                <label>Role</label>
+                <input type="text" id="profileRole" disabled>
+
+                <label>Gender</label>
+                <input type="text" id="profileGender" disabled>
+
+                <label>Date of Birth</label>
+                <input type="date" id="profileDOB" disabled>
+
+                <label>Contact</label>
+                <input type="text" id="profileContact" disabled>
+
+                <label>Address</label>
+                <textarea id="profileAddress" disabled></textarea>
+
+                <label>Status</label>
+                <input type="text" id="profileStatus" disabled>
+
+                <div class="profile-actions">
+                    <button type="button" id="editProfileBtn">Edit Profile</button>
+                    <button type="submit" id="saveProfileBtn" style="display:none;">Save Change</button>
+                    <button type="button" id="cancelProfileBtn" style="display:none;">Cancel</button>
+                    <button type="button" id="backDashboardBtn">Back to Dashboard</button>
+                </div>
+            </form>
+            <p id="profileMessage"></p>
         </div>
     </div>
 
@@ -88,5 +128,6 @@
         <p>JobPortal - Job Portal & Recruitment System</p>
     </div>
     <script src="../js/admin.js"></script>
+
 </body>
 </html>

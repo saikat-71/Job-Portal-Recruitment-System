@@ -1,7 +1,6 @@
 /* Simple account registration and login for the frontend project. */
 document.addEventListener("DOMContentLoaded", () => {
     const usersKey = "jobPortal:users";
-    const currentUserKey = "jobPortal:currentUser";
 
     function getUsers() {
         try {
@@ -18,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const registerForm = document.querySelector("#register-form");
+    console.log("Register form found:", registerForm);
 
     if (registerForm) {
         const password = registerForm.elements.namedItem("password");
@@ -106,12 +106,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 Admin: "admin/dashboard.html"
             };
 
-            const sessionUser = { ...user };
-            delete sessionUser.password;
-            delete sessionUser.confirm_password;
-
             try {
-                localStorage.setItem(currentUserKey, JSON.stringify(sessionUser));
+                localStorage.setItem("userName", user.name);
+                localStorage.setItem("userEmail", user.email);
+                localStorage.setItem("userRole", user.role);
+                localStorage.setItem("userGender", user.gender);
+                localStorage.setItem("userDOB", user.dob);
+                localStorage.setItem("userContact", user.contact);
+                localStorage.setItem("userAddress", user.address);
+                localStorage.setItem("userStatus", user.status);
                 showFormMessage(message, "Login successful. Opening your dashboard...", false);
                 window.setTimeout(() => {
                     window.location.href = dashboards[user.role];

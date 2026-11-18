@@ -19,34 +19,41 @@ body {
     align-items: center;
     z-index: 10;
 }
+
 .logo {
     justify-self: start;
 }
+
 .logo img {
     width: 135px;
     height: 40px;
 }
+
 .header h3 {
     color: #285f58;
     margin: 0;
     position: static;
     text-align: center;
 }
+
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
     justify-self: end;
 }
+
 .user-info img {
     width: 43px;
     height: 43px;
     border-radius: 50%;
 }
+
 .user-info h4 {
     margin: 0;
     color: #285f58;
 }
+
 .user-info p {
     margin: 3px 0 0;
     color: #777;
@@ -62,7 +69,8 @@ body {
     bottom: 36px;
     padding: 20px;
 }
-.sidebar a {  
+
+.sidebar a {
     display: block;
     text-decoration: none;
     color: #333;
@@ -70,15 +78,16 @@ body {
     margin-bottom: 10px;
     border-radius: 5px;
 }
+
 .sidebar a:hover, .sidebar a.active {
     background-color: #286b63;
     color: white;
 }
+
 .sidebar a[href="../login.html"]:hover {
     background-color: #dc3545;
     color: white;
 }
-
 
 .main {
     margin-left: 270px;
@@ -87,6 +96,7 @@ body {
     padding: 25px;
     min-height: 694px;
 }
+
 .main h1 {
     color: #285f58;
     margin-bottom: 30px;
@@ -95,6 +105,7 @@ body {
 .cards {
     margin-bottom: 35px;
 }
+
 .card {
     display: inline-block;
     width: 40%;
@@ -104,9 +115,11 @@ body {
     border: 1px solid #ddd;
     border-radius: 8px;
 }
+
 .card h3 {
     color: #555;
 }
+
 .card h2 {
     color: #285f58;
     font-size: 28px;
@@ -117,23 +130,111 @@ body {
     padding: 20px;
     border-radius: 8px;
 }
+
 .recent-users h2 {
     color: #285f58;
 }
-
-
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
 th, td {
     padding: 15px;
     text-align: left;
     border: 1px solid #ddd;
 }
+
 th {
     background-color: #f4f6fa;
+}
+
+.profile-button-container {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.view-profile-btn {
+    background-color: #356b64;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.view-profile-btn:hover {
+    background-color: #28564f;
+}
+
+#profileSection {
+    background-color: white;
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+
+#profileSection h1 {
+    color: #285f58;
+    margin-bottom: 25px;
+}
+
+#adminProfileForm label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #444;
+}
+
+#adminProfileForm input, #adminProfileForm textarea {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+#adminProfileForm input:disabled, #adminProfileForm textarea:disabled {
+    background-color: #f1f3f5;
+    color: #555;
+}
+
+#adminProfileForm textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.profile-actions button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #356b64;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.profile-actions button:hover {
+    background-color: #28564f;
+}
+
+#profileMessage {
+    color: #285f58;
+    font-weight: bold;
 }
 
 
@@ -153,6 +254,7 @@ th {
     font-size: 14px;
     z-index: 10;
 }
+
 .footer p {
     margin: 0;
 }
@@ -166,10 +268,10 @@ th {
     .header h3 {
         display: none;
     }
-    .logo img{
-        width:100px;
+    .logo img {
+        width: 100px;
     }
-        .user-info img {
+    .user-info img {
         width: 35px;
         height: 35px;
     }
