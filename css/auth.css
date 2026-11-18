@@ -3,7 +3,8 @@
 }
 
 .auth-shell {
-  width: min(980px, calc(100% - 40px));
+  width: 90%;
+  max-width: 980px;
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   align-items: stretch;
@@ -17,25 +18,25 @@
   flex-direction: column;
   justify-content: center;
   padding: 30px;
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
 }
 
 .auth-intro h1 {
   margin: 0 0 10px;
-  color: var(--white);
+  color: #ffffff;
   font-size: 32px;
 }
 
 .auth-intro p {
   margin-bottom: 0;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .auth-card {
   padding: 28px;
-  border: 1px solid var(--line);
-  background: var(--white);
+  border: 1px solid #d3ddd6;
+  background: #ffffff;
 }
 
 .auth-card h2 {
@@ -45,13 +46,13 @@
 
 .auth-card > p {
   margin-top: 0;
-  color: var(--muted);
+  color: #64736d;
 }
 
 .auth-card fieldset {
   margin: 0 0 20px;
   padding: 15px;
-  border: 1px solid var(--line);
+  border: 1px solid #d3ddd6;
 }
 
 .auth-card legend {
@@ -83,8 +84,8 @@
   padding: 8px 10px;
   border: 1px solid #aebdb5;
   border-radius: 3px;
-  color: var(--text);
-  background: var(--white);
+  color: #193c38;
+  background: #ffffff;
 }
 
 .field textarea {
@@ -95,7 +96,7 @@
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  outline: 2px solid var(--green);
+  outline: 2px solid #176b62;
 }
 
 .span-two {
@@ -110,7 +111,7 @@
 .form-message {
   min-height: 20px;
   margin: 5px 0 12px;
-  color: var(--green-dark);
+  color: #10574f;
   font-size: 14px;
 }
 
@@ -148,7 +149,7 @@
 
 @media (max-width: 480px) {
   .auth-shell {
-    width: calc(100% - 24px);
+    width: 95%;
   }
 
   .auth-card {
