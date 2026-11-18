@@ -469,9 +469,10 @@ body[data-page="registration.html"] main > h1 {
 }
 
 .dashboard-content {
-    width: auto;
+    width: 92%;
+    max-width: 1120px;
     min-width: 0;
-    margin: 0;
+    margin: 32px auto;
     padding: 26px;
 }
 
@@ -845,5 +846,26 @@ button.logout-link:hover {
   .metric-grid,
   [data-job-results] {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* Responsive dashboard styles */
+@media (max-width: 720px) {
+  .dashboard-layout {
+    display: block;
+  }
+
+  .dashboard-sidebar {
+    border-right: 0;
+    border-bottom: 1px solid #d3ddd6;
+  }
+
+  .dashboard-content {
+    padding: 18px 12px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
   }
 }
