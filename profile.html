@@ -90,7 +90,7 @@
 
       <section id="profile-update">
         <h2>Update Profile Information</h2>
-        <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="users" data-id-field="user_id" data-match="email">
+        <form action="#" method="post" enctype="multipart/form-data">
           <input type="hidden" id="profile-user-id" name="user_id">
           <input type="hidden" id="profile-role" name="role">
           <fieldset>
@@ -137,7 +137,7 @@
 
       <section id="change-password">
         <h2>Change Password</h2>
-        <form action="#" method="post" data-action="change-password">
+        <form action="#" method="post">
           <div>
             <label for="current-password">Current Password</label>
             <input id="current-password" name="current_password" type="password" autocomplete="current-password" required>
@@ -157,7 +157,7 @@
 
       <section id="delete-account" class="delete-section">
         <h2>Delete Account</h2>
-        <form action="#" method="post" data-action="delete-account">
+        <form action="#" method="post">
           <div>
             <label for="delete-account-email">Enter your account email</label>
             <input id="delete-account-email" name="email" type="email" required>

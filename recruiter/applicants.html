@@ -6,8 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <script src="../js/main.js" defer></script>
+<script src="../js/main.js" defer></script>
     <script src="../js/validation.js" defer></script>
   </head>
   <body>
@@ -71,7 +70,7 @@
                   <th>Update Status</th>
                 </tr>
               </thead>
-              <tbody data-application-list="details">
+              <tbody>
                 <tr>
                   <td colspan="8">Application records will appear here.</td>
                 </tr>
@@ -81,7 +80,7 @@
         </section>
         <section class="panel" aria-labelledby="review-form-heading">
           <h2 id="review-form-heading">Create or Update Applicant Review</h2>
-          <form action="#" method="post" data-action="save" data-collection="applicant_reviews" data-id-field="review_id">
+          <form action="#" method="post">
             <fieldset>
               <legend>Review and Shortlisting Information</legend>
               <div>
@@ -90,7 +89,7 @@
               </div>
               <div>
                 <label for="application-id">Application ID</label>
-                <select id="application-id" name="application_id" required data-options-collection="applications" data-label-field="email" data-value-field="application_id">
+                <select id="application-id" name="application_id" required>
                   <option value="">Select an application</option>
                 </select>
               </div>
@@ -141,14 +140,14 @@
                   <th>Reviewed At</th>
                 </tr>
               </thead>
-              <tbody data-record-list="applicant_reviews" data-fields="review_id,application_id,review_status,shortlist_status,remarks,reviewed_at">
+              <tbody>
                 <tr>
                   <td colspan="6">Review records will appear here.</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <form action="#" method="post" data-action="delete" data-collection="applicant_reviews" data-delete-field="review_id">
+          <form action="#" method="post">
             <div>
               <label for="delete-review-id">Review ID to delete</label>
               <input type="text" id="delete-review-id" name="review_id" required>

@@ -1,15 +1,12 @@
-/* Browser validation helpers for forms. */
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("form").forEach(form => {
-        form.addEventListener("invalid", event => {
-            event.target.classList.add("invalid");
-        }, true);
+document.addEventListener("DOMContentLoaded", function () {
+    var forms = document.querySelectorAll("form");
 
-        form.addEventListener("input", event => {
-            if (event.target.checkValidity()) {
-                event.target.classList.remove("invalid");
+    for (var i = 0; i < forms.length; i++) {
+        forms[i].addEventListener("submit", function (event) {
+            if (!this.checkValidity()) {
+                event.preventDefault();
+                this.reportValidity();
             }
         });
-    });
+    }
 });
-
