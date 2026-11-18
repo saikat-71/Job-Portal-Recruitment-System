@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiring and Selection | JobPortal</title>
+  <link rel="stylesheet" href="../css/hr-manager.css">
+  <script src="../js/hr-manager.js" defer></script>
+</head>
+<body>
+
+<header class="hr-topbar">
+  <a class="hr-brand" href="dashboard.html">JobPortal</a>
+  <div class="hr-top-title">HR Manager Dashboard</div>
+  <div class="hr-user"><span class="hr-avatar">HR</span><span>HR Manager</span></div>
+</header>
+<div class="hr-layout">
+  <aside class="hr-sidebar">
+    <nav>
+      <a href="dashboard.html" >▦ Dashboard</a>
+      <a href="interviews.html" >▤ Interviews</a>
+      <a href="evaluations.html" >♙ Candidates</a>
+      <a href="hiring.html" class="active">✓ Hiring</a>
+      <a href="../profile.html">⚙ My Profile</a>
+      <a href="../login.html" data-logout>⇥ Logout</a>
+    </nav>
+  </aside>
+
+  <main class="hr-main">
+
+    <a class="hr-back" href="dashboard.html">← Back to Dashboard</a>
+    <h1>Hiring and Selection Management</h1>
+    <section class="hr-panel">
+      <h2>Add / Update Hiring Record</h2>
+      <form id="hiring-form">
+        <input type="hidden" name="id">
+        <div class="hr-form-grid">
+          <label>Candidate Name<input name="candidate" required></label>
+          <label>Job Position<input name="position" required></label>
+          <label>Hiring Status<select name="status"><option>Under Review</option><option>Shortlisted</option><option>Selected</option><option>Offer Sent</option><option>Hired</option><option>Rejected</option></select></label>
+          <label>Decision / Offer Date<input type="date" name="date"></label>
+          <label class="full">Hiring Notes<textarea name="notes" rows="4" placeholder="Add hiring decision notes..."></textarea></label>
+        </div>
+        <div class="hr-buttons"><button type="submit">Save Hiring Record</button><button type="reset" class="secondary">Clear</button></div>
+        <p id="hi-message" class="hr-message" role="status"></p>
+      </form>
+    </section>
+    <h2>Hiring &amp; Selection Records</h2>
+    <div class="hr-table-wrap"><table><thead><tr><th>Candidate</th><th>Position</th><th>Status</th><th>Date</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="hiring-rows"><tr><td colspan="6">No hiring records yet.</td></tr></tbody></table></div>
+
+  </main>
+</div>
+</body>
+</html>
