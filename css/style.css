@@ -424,7 +424,6 @@ textarea {
   }
 }
 
-/* Simple button look for page navigation links */
 .main-nav a,
 .header-inner > a:not(.brand),
 .footer-inner nav a {
@@ -496,8 +495,6 @@ textarea {
   text-decoration: none;
 }
 
-
-/* Shared header size and user profile area */
 .site-header {
   display: block;
   min-height: 84px;
@@ -552,7 +549,6 @@ textarea {
   font-size: 12px;
 }
 
-/* Shared footer height */
 .site-footer {
   display: flex;
   min-height: 72px;
@@ -617,8 +613,6 @@ textarea {
   }
 }
 
-
-/* Simple, aligned header layout */
 .site-header .header-inner {
   display: grid;
   grid-template-columns: 170px 1fr 260px;
@@ -721,8 +715,6 @@ textarea {
   }
 }
 
-
-/* Home, Login, Registration and Reset Password navigation buttons */
 .main-nav {
   display: flex;
   flex-wrap: wrap;
@@ -756,7 +748,6 @@ textarea {
   background: #10574f;
 }
 
-/* Home page contact map and quote */
 .contact-layout {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -825,8 +816,6 @@ textarea {
   }
 }
 
-
-/* Align the public page buttons with the right edge of the header */
 .header-space {
   display: none;
 }
@@ -866,7 +855,6 @@ textarea {
 }
 
 
-/* Logout button: red background with white text */
 .main-nav .account-logout-link {
   color: #ffffff;
   background: #a92d2d;
@@ -881,7 +869,6 @@ textarea {
 }
 
 
-/* Logout link uses the same red style on every public page. */
 .main-nav a.account-logout-link,
 .main-nav a.account-logout-link.nav-button {
   color: #ffffff;
@@ -897,7 +884,6 @@ textarea {
 }
 
 
-/* Authentication page styles */
 .auth-page {
   min-height: 100vh;
 }
@@ -1106,7 +1092,6 @@ textarea {
     color: #ffffff;
 }
 
-/* Keep the logged-in Logout button red */
 .main-nav a.account-logout-link,
 .main-nav a.account-logout-link.nav-button {
     border: 1px solid #a92d2d;

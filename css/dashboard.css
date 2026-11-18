@@ -99,7 +99,6 @@ p {
     margin: 0 0 12px;
 }
 
-/* Home hero and featured job cards */
 body[data-page="index.html"] main > section:first-child {
     padding: 40px;
     color: #ffffff;
@@ -131,7 +130,6 @@ figure {
     margin: 18px 0;
 }
 
-/* Dashboard layout */
 body.dashboard-page {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -210,7 +208,6 @@ dd {
     font-weight: 700;
 }
 
-/* Forms and accessible controls */
 form {
     margin: 18px 0;
 }
@@ -384,7 +381,6 @@ footer {
     }
 }
 
-/* Dashboard summary cards */
 .metric-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -410,7 +406,6 @@ footer {
     font-weight: 700;
 }
 
-/* Authentication pages follow the registration and login mockups. */
 body[data-page="login.html"] main,
 body[data-page="registration.html"] main,
 body[data-page="forgot-password.html"] main,
@@ -444,7 +439,6 @@ body[data-page="registration.html"] main > h1 {
     display: none;
 }
 
-/* Layout used by pages inside the role folders */
 .dashboard-layout {
     display: grid;
     grid-template-columns: 220px 1fr;
@@ -577,8 +571,6 @@ body[data-page="registration.html"] main > h1 {
     color: #7f1d1d;
 }
 
-
-/* Recruiter menu links look and feel like simple buttons */
 .dashboard-sidebar nav a {
     display: block;
     margin: 0 0 8px;
@@ -613,8 +605,6 @@ body[data-page="registration.html"] main > h1 {
     outline-offset: 2px;
 }
 
-
-/* Profile summary and account actions */
 .profile-top {
     display: flex;
     align-items: center;
@@ -709,8 +699,6 @@ body[data-page="registration.html"] main > h1 {
     }
 }
 
-
-/* Profile and recruiter navigation uses the same button style */
 body.dashboard-page > aside nav a {
     display: block;
     margin: 0 0 8px;
@@ -740,8 +728,6 @@ body.dashboard-page > aside nav .logout-link:hover {
     background: #a92d2d;
 }
 
-
-/* Company information overview */
 .company-top {
     display: flex;
     align-items: center;
@@ -811,8 +797,6 @@ body.dashboard-page > aside nav .logout-link:hover {
     text-decoration: none;
 }
 
-
-/* Destructive and password-recovery actions use red styling. */
 button.danger,
 button.danger-button,
 .danger-button,
@@ -839,8 +823,6 @@ button.logout-link:hover {
     border-color: #a92d2d;
 }
 
-
-/* Simple responsive card layouts. */
 @media (max-width: 760px) {
   dl,
   .metric-grid,
@@ -849,8 +831,6 @@ button.logout-link:hover {
   }
 }
 
-
-/* Responsive dashboard styles */
 @media (max-width: 720px) {
   .dashboard-layout {
     display: block;
