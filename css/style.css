@@ -1,29 +1,17 @@
-/* Main colours used on the site */
-:root {
-  --green: #176b62;
-  --green-dark: #10574f;
-  --light-green: #e8f2ed;
-  --text: #193c38;
-  --muted: #64736d;
-  --line: #d3ddd6;
-  --page: #ffffff;
-  --white: #ffffff;
-}
-
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  color: var(--text);
-  background: var(--page);
+  color: #193c38;
+  background: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
 }
 
 a {
-  color: var(--green-dark);
+  color: #10574f;
   text-decoration: none;
 }
 
@@ -39,13 +27,14 @@ textarea {
 }
 
 .container {
-  width: min(1100px, calc(100% - 40px));
+  width: 90%;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .site-header {
-  border-bottom: 1px solid var(--line);
-  background: var(--white);
+  border-bottom: 1px solid #d3ddd6;
+  background: #ffffff;
 }
 
 .header-inner {
@@ -69,34 +58,34 @@ textarea {
 }
 
 .main-nav a {
-  color: var(--text);
+  color: #193c38;
 }
 
 .main-nav .nav-button {
   min-width: 76px;
   padding: 6px 12px;
-  border: 1px solid var(--green);
+  border: 1px solid #176b62;
   text-align: center;
 }
 
 .main-nav .nav-button:last-child {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
 }
 
 .button {
   display: inline-block;
   padding: 9px 18px;
-  border: 1px solid var(--green);
-  color: var(--white);
-  background: var(--green);
+  border: 1px solid #176b62;
+  color: #ffffff;
+  background: #176b62;
   text-align: center;
   cursor: pointer;
 }
 
 .button:hover {
-  color: var(--white);
-  background: var(--green-dark);
+  color: #ffffff;
+  background: #10574f;
   text-decoration: none;
 }
 
@@ -107,12 +96,12 @@ textarea {
   align-items: center;
   gap: 32px;
   padding: 35px 20px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #d3ddd6;
 }
 
 .hero-content h1 {
   margin: 0 0 12px;
-  color: var(--green-dark);
+  color: #10574f;
   font-size: 42px;
   line-height: 1.2;
 }
@@ -120,7 +109,7 @@ textarea {
 .hero-content > p {
   max-width: 540px;
   margin: 0 0 22px;
-  color: var(--muted);
+  color: #64736d;
   font-size: 18px;
 }
 
@@ -137,7 +126,8 @@ textarea {
 }
 
 .hero-picture {
-  width: min(100%, 480px);
+  width: 100%;
+  max-width: 480px;
   justify-self: center;
 }
 
@@ -151,7 +141,7 @@ textarea {
 .featured-section,
 .info-section {
   padding: 25px 20px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid #d3ddd6;
 }
 
 .section-title-row {
@@ -178,7 +168,7 @@ textarea {
   min-height: 145px;
   padding: 16px;
   border: 1px solid #66717d;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .job-card h3 {
@@ -188,33 +178,32 @@ textarea {
 
 .company-name {
   margin: 2px 0 18px;
-  color: var(--muted);
+  color: #64736d;
 }
 
 .job-meta {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  color: var(--text);
+  color: #193c38;
   font-size: 14px;
 }
 
 .job-meta span:last-child {
   padding: 1px 8px;
-  border: 1px solid var(--line);
+  border: 1px solid #d3ddd6;
 }
 
 .search-message {
   min-height: 20px;
   margin: 12px 0 0;
-  color: var(--muted);
+  color: #64736d;
 }
 
 .roles-section {
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding: 45px max(20px, calc((100vw - 1100px) / 2)) 48px;
-  background: var(--page);
+  margin: 0;
+  padding: 45px 20px 48px;
+  background: #ffffff;
 }
 
 .section-heading {
@@ -224,7 +213,7 @@ textarea {
 
 .section-kicker {
   margin: 0 0 8px;
-  color: var(--green);
+  color: #176b62;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -232,13 +221,13 @@ textarea {
 
 .section-heading h2 {
   margin: 0;
-  color: var(--green-dark);
+  color: #10574f;
   font-size: 32px;
 }
 
 .section-heading > p:last-child {
   margin: 8px 0 0;
-  color: var(--muted);
+  color: #64736d;
 }
 
 .role-list {
@@ -250,9 +239,9 @@ textarea {
 .role-item {
   min-height: 190px;
   padding: 18px;
-  border: 1px solid var(--line);
+  border: 1px solid #d3ddd6;
   border-radius: 9px;
-  background: var(--white);
+  background: #ffffff;
 }
 
 .role-symbol {
@@ -260,8 +249,8 @@ textarea {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  color: var(--green-dark);
-  background: var(--light-green);
+  color: #10574f;
+  background: #e8f2ed;
   line-height: 34px;
   text-align: center;
   font-weight: 700;
@@ -274,7 +263,7 @@ textarea {
 
 .role-item p {
   margin: 0;
-  color: var(--muted);
+  color: #64736d;
   font-size: 14px;
 }
 
@@ -286,13 +275,13 @@ textarea {
   margin-top: 48px;
   padding: 28px 32px;
   border-radius: 10px;
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
 }
 
 .about-cta .section-kicker,
 .about-cta h2 {
-  color: var(--white);
+  color: #ffffff;
 }
 
 .about-cta h2 {
@@ -303,19 +292,19 @@ textarea {
 
 .button-white {
   flex: 0 0 auto;
-  border-color: var(--white);
-  color: var(--green-dark);
-  background: var(--white);
+  border-color: #ffffff;
+  color: #10574f;
+  background: #ffffff;
 }
 
 .button-white:hover {
-  color: var(--green-dark);
-  background: var(--light-green);
+  color: #10574f;
+  background: #e8f2ed;
 }
 
 .info-section p {
   margin-bottom: 0;
-  color: var(--muted);
+  color: #64736d;
 }
 
 .visually-hidden {
@@ -329,8 +318,8 @@ textarea {
 
 .site-footer {
   padding: 17px 0;
-  border-top: 1px solid var(--line);
-  background: var(--white);
+  border-top: 1px solid #d3ddd6;
+  background: #ffffff;
 }
 
 .footer-inner,
@@ -343,7 +332,7 @@ textarea {
 
 .footer-inner p {
   margin: 0;
-  color: var(--muted);
+  color: #64736d;
   font-size: 14px;
 }
 
@@ -353,7 +342,7 @@ textarea {
 
 @media (max-width: 760px) {
   .container {
-    width: calc(100% - 28px);
+    width: 95%;
   }
 
   .header-inner {
@@ -377,7 +366,8 @@ textarea {
   }
 
   .hero-picture {
-    width: min(100%, 300px);
+    width: 100%;
+    max-width: 300px;
   }
 
   .job-list {
@@ -440,10 +430,10 @@ textarea {
 .footer-inner nav a {
   display: inline-block;
   padding: 7px 12px;
-  border: 1px solid var(--green);
+  border: 1px solid #176b62;
   border-radius: 4px;
-  color: var(--green-dark);
-  background: var(--white);
+  color: #10574f;
+  background: #ffffff;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 }
@@ -451,25 +441,25 @@ textarea {
 .main-nav a:hover,
 .header-inner > a:not(.brand):hover,
 .footer-inner nav a:hover {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
   text-decoration: none;
 }
 
 .main-nav .nav-button:last-child {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
 }
 
 .main-nav .nav-button:last-child:hover {
-  background: var(--green-dark);
+  background: #10574f;
 }
 
 .auth-switch a,
 .forgot-link a {
   display: inline-block;
   padding: 4px 9px;
-  border: 1px solid var(--green);
+  border: 1px solid #176b62;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
@@ -477,8 +467,8 @@ textarea {
 
 .auth-switch a:hover,
 .forgot-link a:hover {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
   text-decoration: none;
 }
 
@@ -494,15 +484,15 @@ textarea {
 .section-title-row > a {
   display: inline-block;
   padding: 6px 10px;
-  border: 1px solid var(--green);
+  border: 1px solid #176b62;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .section-title-row > a:hover {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
   text-decoration: none;
 }
 
@@ -522,7 +512,7 @@ textarea {
 .header-title {
   flex: 1;
   margin: 0;
-  color: var(--text);
+  color: #193c38;
   font-size: 18px;
   font-weight: 700;
   text-align: center;
@@ -539,10 +529,10 @@ textarea {
   width: 46px;
   height: 46px;
   flex: 0 0 46px;
-  border: 2px solid var(--line);
+  border: 2px solid #d3ddd6;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--light-green);
+  background: #e8f2ed;
 }
 
 .header-profile-info {
@@ -553,12 +543,12 @@ textarea {
 }
 
 .header-profile-info strong {
-  color: var(--text);
+  color: #193c38;
   font-size: 14px;
 }
 
 .header-profile-info span {
-  color: var(--muted);
+  color: #64736d;
   font-size: 12px;
 }
 
@@ -631,7 +621,7 @@ textarea {
 /* Simple, aligned header layout */
 .site-header .header-inner {
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr) 260px;
+  grid-template-columns: 170px 1fr 260px;
   align-items: center;
   gap: 18px;
   min-height: 84px;
@@ -663,21 +653,21 @@ textarea {
   padding: 0;
   border: 0;
   border-radius: 0;
-  color: var(--green-dark);
+  color: #10574f;
   background: transparent;
   text-decoration: none;
 }
 
 .main-nav a:hover,
 .footer-inner nav a:hover {
-  color: var(--green);
+  color: #176b62;
   background: transparent;
   text-decoration: underline;
 }
 
 @media (max-width: 900px) {
   .site-header .header-inner {
-    grid-template-columns: 150px minmax(0, 1fr) 230px;
+    grid-template-columns: 150px 1fr 230px;
   }
 
   .main-nav {
@@ -687,7 +677,7 @@ textarea {
 
 @media (max-width: 760px) {
   .site-header .header-inner {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 1fr auto;
     gap: 12px;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -743,27 +733,27 @@ textarea {
 .main-nav a {
   display: inline-block;
   padding: 7px 12px;
-  border: 1px solid var(--green);
+  border: 1px solid #176b62;
   border-radius: 4px;
-  color: var(--green-dark);
-  background: var(--white);
+  color: #10574f;
+  background: #ffffff;
   text-decoration: none;
   transition: color 0.2s, background-color 0.2s;
 }
 
 .main-nav a:hover {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
   text-decoration: none;
 }
 
 .main-nav .nav-button:last-child {
-  color: var(--white);
-  background: var(--green);
+  color: #ffffff;
+  background: #176b62;
 }
 
 .main-nav .nav-button:last-child:hover {
-  background: var(--green-dark);
+  background: #10574f;
 }
 
 /* Home page contact map and quote */
@@ -801,8 +791,8 @@ textarea {
   flex-direction: column;
   justify-content: center;
   padding: 28px;
-  color: var(--white);
-  background: var(--green-dark);
+  color: #ffffff;
+  background: #10574f;
 }
 
 .quote-label {
@@ -815,7 +805,7 @@ textarea {
 
 .contact-quote blockquote {
   margin: 0;
-  font-size: clamp(22px, 3vw, 32px);
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.35;
 }
@@ -863,7 +853,7 @@ textarea {
 .forgot-button {
     display: inline-block;
     padding: 8px 12px;
-    color: #a92d2d !important;
+    color: #a92d2d;
     border: 1px solid #a92d2d;
     border-radius: 6px;
     background: #fff4f4;
@@ -871,6 +861,37 @@ textarea {
     font-weight: 700;
 }
 .forgot-button:hover {
-    color: #ffffff !important;
+    color: #ffffff;
     background: #a92d2d;
+}
+
+
+/* Logout button: red background with white text */
+.main-nav .account-logout-link {
+  color: #ffffff;
+  background: #a92d2d;
+  border: 1px solid #a92d2d;
+}
+
+.main-nav .account-logout-link:hover {
+  color: #ffffff;
+  background: #7f1d1d;
+  border-color: #7f1d1d;
+  text-decoration: none;
+}
+
+
+/* Logout link uses the same red style on every public page. */
+.main-nav a.account-logout-link,
+.main-nav a.account-logout-link.nav-button {
+  color: #ffffff;
+  background: #a92d2d;
+  border: 1px solid #a92d2d;
+}
+
+.main-nav a.account-logout-link:hover,
+.main-nav a.account-logout-link.nav-button:hover {
+  color: #ffffff;
+  background: #7f1d1d;
+  border-color: #7f1d1d;
 }
