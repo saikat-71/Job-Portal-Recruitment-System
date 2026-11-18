@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Posts Management</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/job-posts.css">
+    <link rel="icon" href="../images/favicon.svg">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="../images/logo.svg" alt="JobPortal">
+        </div>
+        <h3>Job Posts</h3>
+        <div class="user-info">
+            <img src="../images/profile-placeholder.svg" alt="Profile">
+            <div>
+                <p>JobPortal User</p>
+                <span>Admin</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="users.html">User Management</a>
+        <a href="job-categories.html">Job Categories</a>
+        <a href="job-posts.html" class="active">Job Posts</a>
+        <a href="reports.html">Reports</a>
+        <a href="../login.html">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Job Posts Management</h1>
+        <p>Review and manage job posts submitted by recruiters.</p>
+        <div class="job-controls">
+            <input type="text" id="searchInput" placeholder="Search by job title, company or category">
+        </div>
+
+        <div class="recent-users">
+            <h2>All Job Posts</h2>
+            <table id="jobTable">
+                <tr>
+                    <th>Job ID</th>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>JobPortal - Job Portal & Recruitment System</p>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script src="../js/job-posts.js"></script>
+
+</body>
+</html>
