@@ -80,7 +80,7 @@
 
         <section id="company-edit" class="panel" aria-labelledby="company-form-heading">
           <h2 id="company-form-heading">Create or Update Company Profile</h2>
-          <form action="#" method="post" enctype="multipart/form-data" data-action="save" data-collection="companies" data-id-field="company_id" data-match="user_id">
+          <form action="#" method="post" enctype="multipart/form-data">
             <input type="hidden" id="company-id" name="company_id">
             <input type="hidden" id="company-user-id" name="user_id">
             <fieldset>
@@ -109,7 +109,7 @@
 
         <section id="company-delete" class="delete-section" aria-labelledby="delete-company-heading">
           <h2 id="delete-company-heading">Delete Company Profile</h2>
-          <form action="#" method="post" data-action="delete" data-collection="companies" data-delete-field="company_id">
+          <form action="#" method="post">
             <input type="hidden" id="delete-company-id" name="company_id">
             <button class="danger" type="submit">Delete Company Profile</button>
             <p class="form-status" role="status" aria-live="polite"></p>

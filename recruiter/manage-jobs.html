@@ -54,7 +54,7 @@
         <h1 class="page-heading">Job Post Management</h1>
         <section class="panel" aria-labelledby="job-post-form-heading">
           <h2 id="job-post-form-heading">Create or Update Job Post</h2>
-          <form action="#" method="post" data-action="save" data-collection="job_posts" data-id-field="job_id">
+          <form action="#" method="post">
             <fieldset>
               <legend>Job Post Information</legend>
               <div>
@@ -67,13 +67,13 @@
               </div>
               <div>
                 <label for="company-id">Company</label>
-                <select id="company-id" name="company_id" required data-options-collection="companies" data-label-field="company_name" data-value-field="company_id">
+                <select id="company-id" name="company_id" required>
                   <option value="">Select a company profile</option>
                 </select>
               </div>
               <div>
                 <label for="category-id">Job Category</label>
-                <select id="category-id" name="category_id" required data-options-collection="categories" data-label-field="category_name" data-value-field="category_id">
+                <select id="category-id" name="category_id" required>
                   <option value="">Select a job category</option>
                 </select>
               </div>
@@ -123,14 +123,14 @@
                   <th>Requirements</th>
                 </tr>
               </thead>
-              <tbody data-record-list="job_posts" data-fields="job_id,title,company_id,category_id,location,status,description,requirements">
+              <tbody>
                 <tr>
                   <td colspan="8">Job post records will appear here.</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <form action="#" method="post" data-action="delete" data-collection="job_posts" data-delete-field="job_id">
+          <form action="#" method="post">
             <div>
               <label for="delete-job-id">Job ID to delete</label>
               <input type="text" id="delete-job-id" name="job_id" required>
