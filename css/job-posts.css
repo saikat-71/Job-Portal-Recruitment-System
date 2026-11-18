@@ -1,0 +1,122 @@
+.job-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.job-controls input {
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.recent-users h2 {
+    color: #285f58;
+    margin-bottom: 20px;
+}
+
+.recent-users table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-users th, .recent-users td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.recent-users th {
+    background-color: #f4f6fa;
+    color: #333;
+}
+
+.recent-users td {
+    font-size: 14px;
+}
+
+.view-btn, .approve-btn, .reject-btn, .delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.view-btn {
+    background-color: #e8edf5;
+    color: #285f58;
+}
+
+.view-btn:hover {
+    background-color: #d8e1ef;
+}
+
+.approve-btn {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.approve-btn:hover {
+    background-color: #b8dccc;
+}
+
+.reject-btn {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.reject-btn:hover {
+    background-color: #ffe69c;
+}
+
+.delete-btn {
+    background-color: #f5e5e5;
+    color: #a33;
+}
+
+.delete-btn:hover {
+    background-color: #ebcccc;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.approved {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.rejected {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+@media (max-width: 700px) {
+    .job-controls {
+        display: block;
+    }
+    .job-controls input {
+        width: 90%;
+        margin-bottom: 15px;
+    }
+    .recent-users {
+        overflow-x: auto;
+    }
+    .recent-users table {
+        min-width: 800px;
+    }
+}

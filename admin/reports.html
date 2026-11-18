@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/reports.css">
+    <link rel="icon" href="../images/favicon.svg">
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="../images/logo.svg" alt="JobPortal">
+        </div>
+        <h3>Reports</h3>
+        <div class="user-info">
+            <img src="../images/profile-placeholder.svg" alt="Profile">
+            <div>
+                <p>JobPortal User</p>
+                <span>Admin</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="users.html">User Management</a>
+        <a href="job-categories.html">Job Categories</a>
+        <a href="job-posts.html">Job Posts</a>
+        <a href="reports.html" class="active">Reports</a>
+        <a href="../login.html">Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>Reports & Statistics</h1>
+        <p>Overview of JobPortal activities.</p>
+        <h2>User Reports</h2>
+        <div class="report-container">
+            <div class="report-card" data-report="users">
+                <h3>Total Users</h3>
+                <h2 id="totalUsers">0</h2>
+            </div>
+
+            <div class="report-card" data-report="recruiters">
+                <h3>Recruiters</h3>
+                <h2 id="totalRecruiters">0</h2>
+            </div>
+
+            <div class="report-card" data-report="seekers">
+                <h3>Job Seekers</h3>
+                <h2 id="totalSeekers">0</h2>
+            </div>
+        </div>
+
+        <h2>Job Post Reports</h2>
+        <div class="report-container">
+            <div class="report-card" data-report="jobs">
+                <h3>Total Job Posts</h3>
+                <h2 id="totalJobs">0</h2>
+            </div>
+
+            <div class="report-card" data-report="approved">
+                <h3>Approved Jobs</h3>
+                <h2 id="approvedJobs">0</h2>
+            </div>
+
+            <div class="report-card" data-report="pending">
+                <h3>Pending Jobs</h3>
+                <h2 id="pendingJobs">0</h2>
+            </div>
+
+            <div class="report-card" data-report="rejected">
+                <h3>Rejected Jobs</h3>
+                <h2 id="rejectedJobs">0</h2>
+            </div>
+        </div>
+
+        <h2>Category Reports</h2>
+        <div class="report-container">
+            <div class="report-card" data-report="categories">
+                <h3>Total Categories</h3>
+                <h2 id="totalCategories">0</h2>
+            </div>
+        </div>
+
+        <div class="details-section" id="detailsSection">
+            <h2 id="detailsTitle">Report Details</h2>
+            <div class="details-table">
+                <table id="detailsTable">
+                    <tr>
+                        <th>Details</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>JobPortal - Job Portal & Recruitment System</p>
+    </div>
+
+    <script src="../js/admin.js"></script>
+    <script src="../js/reports.js"></script>
+
+</body>
+</html>

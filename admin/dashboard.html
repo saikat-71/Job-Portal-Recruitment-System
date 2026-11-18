@@ -1,40 +1,140 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Dashboard | JobPortal</title>
-  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
-<script src="../js/main.js" defer></script>
-  <script src="../js/validation.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard | JobPortal</title>
+<link rel="icon" href="../images/favicon.svg">
+<link rel="stylesheet" href="../css/admin.css">
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="../index.html"><img src="../images/logo.svg" alt="JobPortal" width="155" height="40"></a>
-      <p class="header-title">Admin Dashboard</p>
-      <div class="header-profile">
-        <img id="header-profile-photo" src="../images/profile-placeholder.svg" alt="Profile picture" width="48" height="48">
-        <div class="header-profile-info"><strong id="header-profile-name">User</strong><span id="header-profile-role">Admin</span></div>
-      </div>
+    <script>
+    if (localStorage.getItem("userRole") !== "Admin") {
+        window.location.href = "../login.html";
+    }
+</script>
+    <div class="header">
+        <div class="logo">
+            <img src="../images/logo.svg" alt="JobPortal">
+        </div>
+        <h3>Admin Dashboard</h3>
+
+        <div class="user-info">
+            <img src="../images/profile-placeholder.svg" alt="Profile">
+            <div>
+                <h4 id="headerName">JobPortal User</h4>
+                <p>Admin Dashboard</p>
+            </div>
+        </div>
     </div>
-  </header>
-  <main class="dashboard-content container" id="main-content">
-    <h1 class="page-heading">Welcome to your Admin Dashboard</h1>
-    <section class="panel">
-      <h2>Your Account</h2>
-      <p>This is your personalized dashboard. You can view and update your account information, change your password, and manage your profile picture.</p>
-      <p><a class="button" href="../profile.html">Manage My Profile</a></p>
-      <p><a class="button" href="../index.html">Go to Home</a></p>
-      <p><a class="logout-link" href="../login.html">Log Out</a></p>
-    </section>
-    <section class="panel">
-      <h2>Role Features</h2>
-      <p>The detailed Admin feature module is not included in this project submission. This page provides the common dashboard and account navigation.</p>
-    </section>
-  </main>
-  <footer class="site-footer"><div class="container footer-inner"><p>JobPortal - Job Portal &amp; Recruitment System</p></div></footer>
+
+    <div class="sidebar">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="users.html">User Management</a>
+        <a href="job-categories.html">Job Categories</a>
+        <a href="job-posts.html">Job Posts</a>
+        <a href="reports.html">Reports</a>
+        <a href="../login.html">Logout</a>
+    </div>
+
+    <div class="main">
+        <div id="dashboardContent">
+            <h1>Admin Dashboard</h1>
+            <div class="profile-button-container">
+                <button type="button" id="viewProfileBtn" class="view-profile-btn"> View Profile </button>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Users</h3>
+                    <h2>45</h2>
+                </div>
+                <div class="card">
+                    <h3>Recruiters</h3>
+                    <h2>12</h2>
+                </div>
+                <div class="card">
+                    <h3>Job Seekers</h3>
+                    <h2>28</h2>
+                </div>
+                <div class="card">
+                    <h3>Job Posts</h3>
+                    <h2>18</h2>
+                </div>
+            </div>
+
+            <div class="recent-users">
+                <h2>Recent Users</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Rahim Ahmed</td>
+                        <td>Recruiter</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Aysha Khan</td>
+                        <td>Job Seeker</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Tanvir Hasan</td>
+                        <td>Job Seeker</td>
+                        <td>Inactive</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div id="profileSection" style="display:none;">
+            <h1>My Profile</h1>
+            <form id="adminProfileForm">
+                <label>Full Name</label>
+                <input type="text" id="profileName" required disabled>
+
+                <label>Email</label>
+                <input type="email" id="profileEmail" required disabled>
+
+                <label>Role</label>
+                <input type="text" id="profileRole" disabled>
+
+                <label>Gender</label>
+                <input type="text" id="profileGender" disabled>
+
+                <label>Date of Birth</label>
+                <input type="date" id="profileDOB" disabled>
+
+                <label>Contact</label>
+                <input type="text" id="profileContact" disabled>
+
+                <label>Address</label>
+                <textarea id="profileAddress" disabled></textarea>
+
+                <label>Status</label>
+                <input type="text" id="profileStatus" disabled>
+
+                <div class="profile-actions">
+                    <button type="button" id="editProfileBtn">Edit Profile</button>
+                    <button type="submit" id="saveProfileBtn" style="display:none;">Save Change</button>
+                    <button type="button" id="cancelProfileBtn" style="display:none;">Cancel</button>
+                    <button type="button" id="backDashboardBtn">Back to Dashboard</button>
+                </div>
+            </form>
+            <p id="profileMessage"></p>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>JobPortal - Job Portal & Recruitment System</p>
+    </div>
+    <script src="../js/admin.js"></script>
+
 </body>
 </html>
