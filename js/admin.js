@@ -9,14 +9,7 @@ if (logoutLink) {
     logoutLink.onclick = function(event) {
         event.preventDefault();
         alert("You have logged out!");
-        localStorage.removeItem("userName");
-        localStorage.removeItem("userEmail");
         localStorage.removeItem("userRole");
-        localStorage.removeItem("userGender");
-        localStorage.removeItem("userDOB");
-        localStorage.removeItem("userContact");
-        localStorage.removeItem("userAddress");
-        localStorage.removeItem("userStatus");
         window.location.href = "../login.html";
     };
 }

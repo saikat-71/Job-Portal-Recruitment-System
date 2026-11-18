@@ -446,6 +446,24 @@ function setupDemoLogin() {
             return;
         }
 
+                // Fixed Admin Login
+        if (role === "Admin") {
+            if (email === "mahi@gmail.com" && password === "12345678") {
+                localStorage.setItem("userName", "Admin");
+                localStorage.setItem("userEmail", "mahi@gmail.com");
+                localStorage.setItem("userRole", "Admin");
+                localStorage.setItem("userGender", "");
+                localStorage.setItem("userDOB", "");
+                localStorage.setItem("userContact", "");
+                localStorage.setItem("userAddress", "");
+                localStorage.setItem("userStatus", "Active");
+                window.location.href = "admin/dashboard.html";
+            } else {
+                message.textContent = "Invalid Admin Email or Password.";
+            }
+            return;
+        }
+
         if (role === "Recruiter") {
             window.location.href = "recruiter/dashboard.html";
             return;
