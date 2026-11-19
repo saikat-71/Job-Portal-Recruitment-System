@@ -1,40 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HR Manager Dashboard | JobPortal</title>
-  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
-<script src="../js/main.js" defer></script>
-  <script src="../js/validation.js" defer></script>
+  <link rel="stylesheet" href="../css/hr-manager.css">
+  <script src="../js/hr-manager.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="../index.html"><img src="../images/logo.svg" alt="JobPortal" width="155" height="40"></a>
-      <p class="header-title">HR Manager Dashboard</p>
-      <div class="header-profile">
-        <img id="header-profile-photo" src="../images/profile-placeholder.svg" alt="Profile picture" width="48" height="48">
-        <div class="header-profile-info"><strong id="header-profile-name">User</strong><span id="header-profile-role">HR Manager</span></div>
-      </div>
-    </div>
-  </header>
-  <main class="dashboard-content container" id="main-content">
-    <h1 class="page-heading">Welcome to your HR Manager Dashboard</h1>
-    <section class="panel">
-      <h2>Your Account</h2>
-      <p>This is your personalized dashboard. You can view and update your account information, change your password, and manage your profile picture.</p>
-      <p><a class="button" href="../profile.html">Manage My Profile</a></p>
-      <p><a class="button" href="../index.html">Go to Home</a></p>
-      <p><a class="logout-link" href="../login.html">Log Out</a></p>
+
+<header class="hr-topbar">
+  <a class="hr-brand" href="dashboard.html">JobPortal</a>
+  <div class="hr-top-title">HR Manager Dashboard</div>
+  <div class="hr-user"><span class="hr-avatar">HR</span><span>HR Manager</span></div>
+</header>
+<div class="hr-layout">
+  <aside class="hr-sidebar">
+    <nav>
+      <a href="dashboard.html" class="active">▦ Dashboard</a>
+      <a href="interviews.html" >▤ Interviews</a>
+      <a href="evaluations.html" >♙ Candidates</a>
+      <a href="hiring.html" >✓ Hiring</a>
+      <a href="../profile.html">⚙ My Profile</a>
+      <a href="../login.html" data-logout>⇥ Logout</a>
+    </nav>
+  </aside>
+
+  <main class="hr-main">
+
+    <h1>HR Manager Dashboard</h1>
+    <p class="hr-muted">Manage interviews, evaluate candidates and make hiring decisions.</p>
+    <section class="hr-stats">
+      <article class="hr-stat"><span>Upcoming Interviews</span><strong id="count-interviews">0</strong></article>
+      <article class="hr-stat"><span>Pending Evaluations</span><strong id="count-evaluations">0</strong></article>
+      <article class="hr-stat"><span>Hired Candidates</span><strong id="count-hired">0</strong></article>
     </section>
-    <section class="panel">
-      <h2>Role Features</h2>
-      <p>The detailed HR Manager feature module is not included in this project submission. This page provides the common dashboard and account navigation.</p>
+    <h2>HR Manager Tasks</h2>
+    <section class="hr-cards">
+      <a class="hr-card" href="interviews.html"><b>01</b><h3>Interview Schedule Creation</h3><p>Create, view, update and cancel interview schedules.</p><strong>Open Interview Schedule →</strong></a>
+      <a class="hr-card" href="evaluations.html"><b>02</b><h3>Candidate Evaluation</h3><p>Evaluate candidates and add interview feedback.</p><strong>Evaluate Candidates →</strong></a>
+      <a class="hr-card" href="hiring.html"><b>03</b><h3>Hiring and Selection Management</h3><p>Manage hiring data and confirm selected candidates.</p><strong>Manage Hiring →</strong></a>
     </section>
+    <h2>Upcoming Interviews</h2>
+    <div class="hr-table-wrap"><table><thead><tr><th>Candidate</th><th>Job Title</th><th>Date &amp; Time</th><th>Action</th></tr></thead><tbody id="dashboard-interviews"><tr><td colspan="4">No upcoming interviews.</td></tr></tbody></table></div>
+
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><p>JobPortal - Job Portal &amp; Recruitment System</p></div></footer>
+</div>
 </body>
 </html>

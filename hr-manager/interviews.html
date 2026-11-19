@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Schedule | JobPortal</title>
+  <link rel="stylesheet" href="../css/hr-manager.css">
+  <script src="../js/hr-manager.js" defer></script>
+</head>
+<body>
+
+<header class="hr-topbar">
+  <a class="hr-brand" href="dashboard.html">JobPortal</a>
+  <div class="hr-top-title">HR Manager Dashboard</div>
+  <div class="hr-user"><span class="hr-avatar">HR</span><span>HR Manager</span></div>
+</header>
+<div class="hr-layout">
+  <aside class="hr-sidebar">
+    <nav>
+      <a href="dashboard.html" >▦ Dashboard</a>
+      <a href="interviews.html" class="active">▤ Interviews</a>
+      <a href="evaluations.html" >♙ Candidates</a>
+      <a href="hiring.html" >✓ Hiring</a>
+      <a href="../profile.html">⚙ My Profile</a>
+      <a href="../login.html" data-logout>⇥ Logout</a>
+    </nav>
+  </aside>
+
+  <main class="hr-main">
+
+    <a class="hr-back" href="dashboard.html">← Back to Dashboard</a>
+    <h1>Interview Schedule Creation</h1>
+    <section class="hr-panel">
+      <h2>Create / Update Interview</h2>
+      <form id="interview-form">
+        <input type="hidden" name="id">
+        <div class="hr-form-grid">
+          <label>Candidate Name<input name="candidate" required></label>
+          <label>Job Title<input name="position" required></label>
+          <label>Interview Date<input type="date" name="date" required></label>
+          <label>Interview Time<input type="time" name="time" required></label>
+          <label>Interview Type<select name="mode"><option>In-person</option><option>Online</option><option>Phone</option></select></label>
+          <label>Location / Meeting Link<input name="location" placeholder="Office room or meeting link"></label>
+          <label>Status<select name="status"><option>Scheduled</option><option>Completed</option><option>Cancelled</option></select></label>
+        </div>
+        <div class="hr-buttons"><button type="submit">Save Interview</button><button type="reset" class="secondary">Clear</button></div>
+        <p id="iv-message" class="hr-message" role="status"></p>
+      </form>
+    </section>
+    <h2>Interview Schedule</h2>
+    <div class="hr-table-wrap"><table><thead><tr><th>Candidate</th><th>Position</th><th>Date</th><th>Time</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead><tbody id="interview-rows"><tr><td colspan="7">No interviews yet.</td></tr></tbody></table></div>
+
+  </main>
+</div>
+</body>
+</html>
