@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="js/main.js" defer></script>
     <script src="js/validation.js" defer></script>
+    <script>
+      (function () {
+        var dashboardLink = document.getElementById("profile-dashboard-link");
+        var role = localStorage.getItem("userRole");
+        var dashboardPages = {
+          "Admin": "admin/dashboard.html",
+          "Recruiter": "recruiter/dashboard.html",
+          "Job Seeker": "job-seeker/dashboard.html",
+          "HR Manager": "hr-manager/dashboard.html"
+        };
+
+        if (dashboardLink && dashboardPages[role]) {
+          dashboardLink.href = dashboardPages[role];
+        }
+      }());
+    </script>
     <script src="js/profile.js" defer></script>
   </head>
   <body class="dashboard-page">
@@ -33,7 +49,7 @@
             <a href="index.html">Home</a>
           </li>
           <li>
-            <a href="recruiter/dashboard.html">Dashboard</a>
+            <a id="profile-dashboard-link" href="recruiter/dashboard.html">Dashboard</a>
           </li>
           <li>
             <a href="profile.html" aria-current="page">My Profile</a>
@@ -178,6 +194,22 @@
       </div>
     </footer>
 
+    <script>
+      (function () {
+        var dashboardLink = document.getElementById("profile-dashboard-link");
+        var role = localStorage.getItem("userRole");
+        var dashboardPages = {
+          "Admin": "admin/dashboard.html",
+          "Recruiter": "recruiter/dashboard.html",
+          "Job Seeker": "job-seeker/dashboard.html",
+          "HR Manager": "hr-manager/dashboard.html"
+        };
+
+        if (dashboardLink && dashboardPages[role]) {
+          dashboardLink.href = dashboardPages[role];
+        }
+      }());
+    </script>
     <script src="js/profile.js" defer></script>
   </body>
 </html>
