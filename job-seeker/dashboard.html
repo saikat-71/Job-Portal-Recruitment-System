@@ -7,34 +7,209 @@
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/dashboard.css">
-<script src="../js/main.js" defer></script>
+  <link rel="stylesheet" href="../css/job-seeker.css">
+  <script src="../js/main.js" defer></script>
   <script src="../js/validation.js" defer></script>
+  <script src="../js/job-seeker.js" defer></script>
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="../index.html"><img src="../images/logo.svg" alt="JobPortal" width="155" height="40"></a>
+      <a class="brand" href="../index.html">
+        <img src="../images/logo.svg" alt="JobPortal" width="155" height="40">
+      </a>
       <p class="header-title">Job Seeker Dashboard</p>
       <div class="header-profile">
         <img id="header-profile-photo" src="../images/profile-placeholder.svg" alt="Profile picture" width="48" height="48">
-        <div class="header-profile-info"><strong id="header-profile-name">User</strong><span id="header-profile-role">Job Seeker</span></div>
+        <div class="header-profile-info">
+          <strong id="header-profile-name">User</strong>
+          <span id="header-profile-role">Job Seeker</span>
+        </div>
       </div>
     </div>
   </header>
-  <main class="dashboard-content container" id="main-content">
-    <h1 class="page-heading">Welcome to your Job Seeker Dashboard</h1>
-    <section class="panel">
-      <h2>Your Account</h2>
-      <p>This is your personalized dashboard. You can view and update your account information, change your password, and manage your profile picture.</p>
-      <p><a class="button" href="../profile.html">Manage My Profile</a></p>
-      <p><a class="button" href="../index.html">Go to Home</a></p>
-      <p><a class="logout-link" href="../login.html">Log Out</a></p>
-    </section>
-    <section class="panel">
-      <h2>Role Features</h2>
-      <p>The detailed Job Seeker feature module is not included in this project submission. This page provides the common dashboard and account navigation.</p>
-    </section>
+
+  <main class="job-seeker-app" id="portal">
+    <aside id="sidebar">
+      <h2>JobPortal</h2>
+
+      <button type="button" onclick="showPage('dashboard')">Dashboard</button>
+      <button type="button" onclick="showPage('profile')">My Profile</button>
+      <button type="button" onclick="showPage('applications')">Applications</button>
+      <button type="button" onclick="showPage('resumes')">Resumes</button>
+      <button type="button" onclick="showPage('savedJobs')">Saved Jobs</button>
+
+      <button type="button" id="logoutButton" onclick="logout()">Logout</button>
+    </aside>
+
+    <div id="content">
+
+      <div id="profile" class="page">
+        <h2>My Profile</h2>
+        <hr>
+
+        <div id="photoBox">
+          <img id="photo" alt="Your photo">
+          <p id="photoText">Your Photo</p>
+        </div>
+
+        <label>Change Photo</label>
+        <input id="photoFile" type="file" accept="image/*" onchange="changePhoto()">
+
+        <label>Name</label>
+        <input id="name" type="text" value="">
+
+        <label>Email</label>
+        <input id="email" type="email" value="">
+
+        <label>Phone</label>
+        <input id="phone" type="text" placeholder="Enter phone number">
+
+        <h3>Change Password</h3>
+        <p class="note">Practice fields only. No password is changed.</p>
+
+        <label>Current Password</label>
+        <input id="currentPassword" type="password">
+
+        <label>New Password</label>
+        <input id="newPassword" type="password">
+
+        <div id="updateArea">
+          <button type="button" onclick="updateProfile()">Update</button>
+        </div>
+      </div>
+
+      <div id="dashboard" class="page">
+        <h2>Dashboard</h2>
+        <hr>
+
+        <p>Choose a job to apply for or save.</p>
+
+        <label>Available Jobs</label>
+        <select id="jobChoice" onchange="showJobDetails()">
+          <option value="0">Junior Web Developer</option>
+          <option value="1">UI Design Intern</option>
+          <option value="2">Data Entry Assistant</option>
+        </select>
+
+        <label>Job Details</label>
+        <textarea id="jobDetails" rows="5" readonly></textarea>
+
+        <div class="buttonRow">
+          <button type="button" onclick="startApplication()">Apply</button>
+          <button type="button" onclick="saveJob()">Save Job</button>
+        </div>
+      </div>
+
+      <div id="applications" class="page">
+        <h2>Applications</h2>
+        <hr>
+
+        <h3>Create or Edit Application</h3>
+        <p class="note">To create an application, first click Apply on the Dashboard.</p>
+
+        <label>Selected Job</label>
+        <input id="applicationJob" type="text" readonly>
+
+        <label>Choose Resume</label>
+        <select id="applicationResume"></select>
+
+        <label>Cover Letter</label>
+        <textarea id="coverLetter" rows="4"></textarea>
+
+        <div class="buttonRow">
+          <button type="button" onclick="submitApplication()">Submit / Update</button>
+          <button type="button" class="gray" onclick="clearApplication()">Clear</button>
+        </div>
+
+        <h3>Submitted Applications</h3>
+
+        <select id="applicationList" onchange="showApplication()">
+          <option value="">No applications</option>
+        </select>
+
+        <label>Application Details</label>
+        <textarea id="applicationDetails" rows="7" readonly></textarea>
+
+        <div class="buttonRow">
+          <button type="button" onclick="editApplication()">Edit Selected</button>
+          <button type="button" class="red" onclick="withdrawApplication()">Withdraw Selected</button>
+        </div>
+      </div>
+
+      <div id="resumes" class="page">
+        <h2>Resumes</h2>
+        <hr>
+
+        <label>Resume Title</label>
+        <input id="resumeTitle" type="text">
+
+        <label>Education, Experience and Skills</label>
+        <textarea id="resumeInformation" rows="5"></textarea>
+
+        <label>Upload or Replace File (optional)</label>
+        <input id="resumeFile" type="file" accept=".pdf,.doc,.docx,.txt">
+
+        <p class="note">
+          You may create a text resume without uploading a file.
+          When editing, leave the file field empty to keep the old file.
+        </p>
+
+        <div class="buttonRow">
+          <button type="button" onclick="saveResume()">Save Resume</button>
+          <button type="button" class="gray" onclick="clearResume()">Clear</button>
+        </div>
+
+        <h3>Your Resumes</h3>
+
+        <select id="resumeList" onchange="showResume()">
+          <option value="">No resumes</option>
+        </select>
+
+        <label>Resume Details</label>
+        <textarea id="resumeDetails" rows="7" readonly></textarea>
+
+        <div class="buttonRow">
+          <button type="button" onclick="editResume()">Edit Selected</button>
+          <button type="button" class="red" onclick="deleteResume()">Delete Selected</button>
+        </div>
+      </div>
+
+      <div id="savedJobs" class="page">
+        <h2>Saved Jobs</h2>
+        <hr>
+
+        <label>Your Saved Jobs</label>
+        <select id="savedList" onchange="showSavedJob()">
+          <option value="">No saved jobs</option>
+        </select>
+
+        <label>Job Details</label>
+        <textarea id="savedDetails" rows="5" readonly></textarea>
+
+        <label>Personal Notes</label>
+        <textarea id="savedNotes" rows="4"></textarea>
+
+        <label>Priority</label>
+        <select id="savedPriority">
+          <option>Low</option>
+          <option>Medium</option>
+          <option>High</option>
+        </select>
+
+        <div class="buttonRow">
+          <button type="button" onclick="updateSavedJob()">Update</button>
+          <button type="button" class="red" onclick="removeSavedJob()">Remove</button>
+        </div>
+      </div>
+
+    </div>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><p>JobPortal - Job Portal &amp; Recruitment System</p></div></footer>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>JobPortal - Job Portal &amp; Recruitment System</p>
+    </div>
+  </footer>
 </body>
 </html>

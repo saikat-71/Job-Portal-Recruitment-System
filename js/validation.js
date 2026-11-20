@@ -29,13 +29,6 @@ function getLoginAccounts() {
             status: "Active"
         },
         {
-            name: "Aysha Khan",
-            email: "aysha@gmail.com",
-            password: "123456",
-            role: "Job Seeker",
-            status: "Active"
-        },
-        {
             name: "HR Manager",
             email: "hr@gmail.com",
             password: "123456",
@@ -89,12 +82,26 @@ function setupLogin() {
             return;
         }
 
-        for (i = 0; i < accounts.length; i++) {
-            if (accounts[i].email.toLowerCase() === email &&
-                accounts[i].password === password &&
-                accounts[i].role === role) {
-                matchedUser = accounts[i];
-                break;
+        // Job Seeker and HR Manager do not use pre-stored demo accounts.
+        // Any valid email and password can start a session for these roles.
+        if (role === "Job Seeker" || role === "HR Manager") {
+            if (email && password.length >= 6) {
+                matchedUser = {
+                    name: role,
+                    email: email,
+                    password: password,
+                    role: role,
+                    status: "Active"
+                };
+            }
+        } else {
+            for (i = 0; i < accounts.length; i++) {
+                if (accounts[i].email.toLowerCase() === email &&
+                    accounts[i].password === password &&
+                    accounts[i].role === role) {
+                    matchedUser = accounts[i];
+                    break;
+                }
             }
         }
 

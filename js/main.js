@@ -469,6 +469,26 @@ function setupDemoLogin() {
             return;
         }
 
+        // Job Seeker Login - no pre-stored email/password required
+        if (role === "Job Seeker") {
+            if (email !== "" && password !== "") {
+                var jobSeekerName = email.split("@")[0] || "Job Seeker";
+
+                localStorage.setItem("userName", jobSeekerName);
+                localStorage.setItem("userEmail", email);
+                localStorage.setItem("userRole", "Job Seeker");
+                localStorage.setItem("userGender", "");
+                localStorage.setItem("userDOB", "");
+                localStorage.setItem("userContact", "");
+                localStorage.setItem("userAddress", "");
+                localStorage.setItem("userStatus", "Active");
+                window.location.href = "job-seeker/dashboard.html";
+            } else {
+                message.textContent = "Please enter a valid email and password.";
+            }
+            return;
+        }
+
         var dashboardPages = {
             "Admin": "admin/dashboard.html",
             "Job Seeker": "job-seeker/dashboard.html",
